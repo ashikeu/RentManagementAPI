@@ -15,13 +15,13 @@ namespace RentManagementAPI.Controllers
         {
             _FloorService = floorService;
         }
-        
+
 
         [HttpGet]
         public async Task<ActionResult<List<Floor>>> GetAllFloors()
         {
-            var result = _FloorService.GetAllFloors();
-            return Ok(result);
+
+            return await _FloorService.GetAllFloors();
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace RentManagementAPI.Controllers
         public async Task<ActionResult<Floor>> GetFloor(int id)
 
         {
-           var result = _FloorService.GetFloor(id);
+           var result = await _FloorService.GetFloor(id);
             return Ok(result);
         }
        
@@ -38,7 +38,7 @@ namespace RentManagementAPI.Controllers
         public async Task<ActionResult<List<Floor>>> AddFloor(Floor floor)
 
         {
-           var result = _FloorService.AddFloor(floor);
+           var result = await _FloorService.AddFloor(floor);
             return Ok(result);
         }
 
@@ -49,7 +49,7 @@ namespace RentManagementAPI.Controllers
         public async Task<ActionResult<List<Floor>>> UpdateFloor(int id, Floor request)
 
         {
-            var result = _FloorService.UpdateFloor(id, request);
+            var result = await _FloorService.UpdateFloor(id, request);
             if (result == null) 
                 return NotFound("floor not found");
             return Ok(result);
@@ -60,7 +60,7 @@ namespace RentManagementAPI.Controllers
         public async Task<ActionResult<List<Floor>?>> DeleteFloor(int id)
 
         {
-            var result = _FloorService.DeleteFloor(id);
+            var result = await _FloorService.DeleteFloor(id);
 
             if (result == null)
                 return NotFound("floor not found");

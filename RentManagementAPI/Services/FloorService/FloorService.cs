@@ -1,61 +1,64 @@
-﻿namespace RentManagementAPI.Services.FloorService
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace RentManagementAPI.Services.FloorService
 {
     public class FloorService : IFloorService
     {
-        public static List<Floor> floors = new List<Floor> {
-        new Floor
+       
+        private readonly DataContext _context;
+        public FloorService(DataContext context)
         {
-        Id = 0,
-        Name = "First"
-        },
-            new Floor
-            {
-                Id = 1,
-        Name = "Second"
-        } };
-        public List<Floor> AddFloor(Floor floor)
-        {
-            floors.Add(floor);
-            return floors;
+            _context = context;
         }
+        public  async Task<List<Floor>> AddFloor(Floor floor)
+        {
+             _context.Floor.Add(floor);
+            await _context.SaveChangesAsync(); 
+            return await _context.Floor.ToListAsync();
+        } 
 
-        public List<Floor> DeleteFloor(int id)
+        public async Task<List<Floor>?> DeleteFloor(int id)
 
 
         {
-            var floor = floors.Find(x => x.Id == id);
+            var floor = await _context.Floor.FindAsync(id);
             if (floor == null)
-                return null;
+                return null; 
 
-            floors.Remove(floor);
-            return floors;
+            _context.Floor.Remove(floor);
+
+            _context.SaveChanges(); 
+            return await _context.Floor.ToListAsync();
 
 
 
-           
+
         }
 
-        public List<Floor> GetAllFloors()
+        public async Task<List<Floor>> GetAllFloors()
+            
         {
-            return floors;
+            var floors = await _context.Floor.ToListAsync();
+            return await _context.Floor.ToListAsync();
         }
 
-        public Floor GetFloor(int id)
+        public async Task<Floor?> GetFloor(int id)
         {
-            var floor = floors.Find(x => x.Id == id);
+            var floor = await _context.Floor.FindAsync(id);
             if (floor == null)
                 return null;
             return floor;
         }
 
-        public List<Floor> UpdateFloor(int id, Floor request)
+        public async Task<List<Floor>?> UpdateFloor(int id, Floor request)
         {
-            var floor = floors.Find(x => x.Id == id);
+            var floor = await _context.Floor.FindAsync(id);
             if (floor == null)
                 return null;
 
             floor.Name = request.Name;
-            return floors;
+            await _context.SaveChangesAsync();
+            return await _context.Floor.ToListAsync();
         }
     }
 }

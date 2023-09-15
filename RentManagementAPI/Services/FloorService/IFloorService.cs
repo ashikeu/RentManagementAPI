@@ -2,14 +2,14 @@
 {
     public interface IFloorService
     {
-        List<Floor> GetAllFloors();
+        Task<List<Floor>> GetAllFloors();
 
-        Floor GetFloor(int id);
+        Task<Floor> GetFloor(int id);
 
-        List<Floor> AddFloor(Floor floor);
+        Task<List<Floor>> AddFloor(Floor floor);
 
-        List<Floor> UpdateFloor(int id, Floor request);
-        List<Floor> DeleteFloor(int id);
+        Task<List<Floor>> UpdateFloor(int id, Floor request);
+        Task<List<Floor>> DeleteFloor(int id);
 
 
 
