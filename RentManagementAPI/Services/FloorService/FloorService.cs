@@ -10,7 +10,7 @@ namespace RentManagementAPI.Services.FloorService
         {
             _context = context;
         }
-        public  async Task<List<Floor>> AddFloor(Floor floor)
+        public  async Task<List<Floor>> AddFloor(Floor floor) 
         {
              _context.Floor.Add(floor);
             await _context.SaveChangesAsync(); 
@@ -38,7 +38,7 @@ namespace RentManagementAPI.Services.FloorService
         public async Task<List<Floor>> GetAllFloors()
             
         {
-            var floors = await _context.Floor.ToListAsync();
+           
             return await _context.Floor.ToListAsync();
         }
 

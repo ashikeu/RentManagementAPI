@@ -1,6 +1,10 @@
 global using RentManagementAPI.Models;
 global using RentManagementAPI.Data;
 using RentManagementAPI.Services.FloorService;
+using RentManagementAPI.Services.FlatService;
+using RentManagementAPI.Services.RentService;
+using RentManagementAPI.Services.TenantService;
+using RentManagementAPI.Services.DepositeService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IFloorService, FloorService>();
+builder.Services.AddScoped<IFlatService, FlatService>();
+builder.Services.AddScoped<IRentService, RentService>();
+builder.Services.AddScoped<ITenantService, TenantService>();
+builder.Services.AddScoped<IDepositeService, DepositeService>();
 builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();

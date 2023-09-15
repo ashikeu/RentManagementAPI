@@ -11,7 +11,7 @@ namespace RentManagementAPI.Controllers
     {
         private readonly IFloorService _FloorService;
 
-        public FloorController(IFloorService floorService)
+        public FloorController(IFloorService floorService) 
         {
             _FloorService = floorService;
         }
