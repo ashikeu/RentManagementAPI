@@ -1,67 +1,141 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using RentManagementAPI.Models;
+using RentManagementAPI.Models.DTOs.Flat;
 
 namespace RentManagementAPI.Services.FlatService
 {
     public class FlatService : IFlatService
     {
-        private readonly DataContext _context;
-        public FlatService(DataContext context)
+        private readonly DataContext _dataContext;
+        private readonly IMapper _mapper;
+        public FlatService(DataContext dataContext, IMapper mapper)
         {
-            _context = context;
+            _dataContext = dataContext;
+            _mapper = mapper;
         }
-        public async Task<List<Flat>> AddFlat(Flat flat)
+        public async Task<ServiceResponse<Flat>> AddFlat(AddFlatDTO flat)
         {
-            _context.Flat.Add(flat);
-            await _context.SaveChangesAsync();
-            return await _context.Flat.ToListAsync();
-        }
+            var serviceResponse = new ServiceResponse<Flat>();
+            try
+            {
+                var flatModel = _mapper.Map<Flat>(flat);
+                await _dataContext.Flat.AddAsync(flatModel);
+                await _dataContext.SaveChangesAsync();
+                serviceResponse.Data = flatModel;
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
 
-        public async Task<List<Flat>?> DeleteFlat(int id)
-
-
-        {
-            var flat = await _context.Flat.FindAsync(id);
-            if (flat == null)
-                return null;
-
-            _context.Flat.Remove(flat);
-
-            _context.SaveChanges();
-            return await _context.Flat.ToListAsync();
-
-
-
-
+            return serviceResponse;
         }
 
-        public async Task<List<Flat>> GetAllFlats()
-
+        public async Task<ServiceResponse<List<Flat>>> GetAllFlats()
         {
-           
-            return await _context.Flat.ToListAsync();
+            var serviceResponse = new ServiceResponse<List<Flat>>();
+            try
+            {
+                var flats = await _dataContext.Flat.Include(tnt => tnt.Tenants).ToListAsync();
+
+                if (flats != null && flats.Count == 0)
+                {
+                    serviceResponse.Data = null;
+                    throw new Exception($"No data found.");
+                }
+                else
+                {
+                    serviceResponse.Data = flats;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<Flat?> GetFlat(int id)
+        public async Task<ServiceResponse<Flat>> GetFlatById(int id)
         {
-            var flat = await _context.Flat.FindAsync(id);
-            if (flat == null)
-                return null;
-            return flat;
+            var serviceResponse = new ServiceResponse<Flat>();
+            try
+            {
+                var existingFlat = await _dataContext.Flat.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFlat is null)
+                {
+                    throw new Exception($"Flat with id {id} not found.");
+                }
+                else
+                {
+                    serviceResponse.Data = existingFlat;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<List<Flat>?> UpdateFlat(int id, Flat request)
+
+        public async Task<ServiceResponse<Flat>> UpdateFlat(int id, AddFlatDTO flat)
         {
-            var flat = await _context.Flat.FindAsync(id);
-            if (flat == null)
-                return null; 
+            var serviceResponse = new ServiceResponse<Flat>();
+            try
+            {
+                var existingFlat = await _dataContext.Flat.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFlat is null)
+                {
+                    throw new Exception($"Flat with id {id} not found.");
+                }
+                else
+                {
+                    var FlatModel = _mapper.Map<Flat>(flat);
+                    existingFlat.Name = FlatModel.Name;
+                    existingFlat.MasterbedRoom = FlatModel.MasterbedRoom;
+                    existingFlat.FlatSize = FlatModel.FlatSize;
+                    existingFlat.FlatSide = FlatModel.FlatSide;
+                    existingFlat.FloorId = FlatModel.FloorId;
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingFlat;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
 
-            flat.Name = request.Name;
-            flat.MasterbedRoom = request.MasterbedRoom;
-            flat.FlatSize = request.FlatSize;
-            flat.FlatSide = request.FlatSide;
+            return serviceResponse;
+        }
 
-            await _context.SaveChangesAsync();
-            return await _context.Flat.ToListAsync();
+        public async Task<ServiceResponse<Flat>> DeleteFlat(int id)
+        {
+            var serviceResponse = new ServiceResponse<Flat>();
+            try
+            {
+                var existingFlat = await _dataContext.Flat.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFlat is null)
+                {
+                    throw new Exception($"Flat with id {id} not found.");
+                }
+                else
+                {
+                    _dataContext.Remove(existingFlat);
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingFlat;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
     }
 }

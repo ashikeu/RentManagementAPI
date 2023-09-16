@@ -1,15 +1,14 @@
-﻿namespace RentManagementAPI.Services.FloorService
+﻿using RentManagementAPI.Models.DTOs.Floor;
+
+namespace RentManagementAPI.Services.FloorService
 {
     public interface IFloorService
     {
-        Task<List<Floor>> GetAllFloors();
-
-        Task<Floor> GetFloor(int id);
-
-        Task<List<Floor>> AddFloor(Floor floor);
-
-        Task<List<Floor>> UpdateFloor(int id, Floor request);
-        Task<List<Floor>> DeleteFloor(int id);
+        Task<ServiceResponse<List<Floor>>> GetAllFloors();
+        Task<ServiceResponse<Floor>> GetFloorById(int id);
+        Task<ServiceResponse<Floor>> AddFloor(AddFloorDTO floor);
+        Task<ServiceResponse<Floor>> UpdateFloor(int id, AddFloorDTO floor);
+        Task<ServiceResponse<Floor>> DeleteFloor(int id);
 
 
 

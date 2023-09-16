@@ -1,64 +1,140 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using RentManagementAPI.Models.DTOs.Floor;
 
 namespace RentManagementAPI.Services.FloorService
 {
     public class FloorService : IFloorService
     {
        
-        private readonly DataContext _context;
-        public FloorService(DataContext context)
+        private readonly DataContext _dataContext;
+        private readonly IMapper _mapper;
+        public FloorService(DataContext dataContext, IMapper mapper)
         {
-            _context = context;
+            _dataContext = dataContext;
+            _mapper = mapper;
         }
-        public  async Task<List<Floor>> AddFloor(Floor floor) 
+        public async Task<ServiceResponse<Floor>> AddFloor(AddFloorDTO floor)
         {
-             _context.Floor.Add(floor);
-            await _context.SaveChangesAsync(); 
-            return await _context.Floor.ToListAsync();
-        } 
+            var serviceResponse = new ServiceResponse<Floor>();
+            try
+            {
+                var floorModel = _mapper.Map<Floor>(floor);
+                await _dataContext.Floor.AddAsync(floorModel);
+                await _dataContext.SaveChangesAsync(); 
+                serviceResponse.Data = floorModel;
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
 
-        public async Task<List<Floor>?> DeleteFloor(int id)
-
-
-        {
-            var floor = await _context.Floor.FindAsync(id);
-            if (floor == null)
-                return null; 
-
-            _context.Floor.Remove(floor);
-
-            _context.SaveChanges(); 
-            return await _context.Floor.ToListAsync();
-
-
-
-
+            return serviceResponse;
         }
 
-        public async Task<List<Floor>> GetAllFloors()
-            
+         public async Task<ServiceResponse<List<Floor>>> GetAllFloors()
         {
-           
-            return await _context.Floor.ToListAsync();
+            var serviceResponse = new ServiceResponse<List<Floor>>();
+            try
+            {
+                var floors = await _dataContext.Floor
+                        .Include(fl => fl.Flats)
+                        .ToListAsync();
+               
+                if (floors != null && floors.Count == 0)
+                {
+                    serviceResponse.Data = null;
+                    throw new Exception($"No data found.");
+                }
+                else
+                {
+                    serviceResponse.Data = floors;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<Floor?> GetFloor(int id)
+        public async Task<ServiceResponse<Floor>> GetFloorById(int id)
         {
-            var floor = await _context.Floor.FindAsync(id);
-            if (floor == null)
-                return null;
-            return floor;
+            var serviceResponse = new ServiceResponse<Floor>();
+            try
+            {
+                var existingFloor = await _dataContext.Floor.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFloor is null)
+                {
+                    throw new Exception($"Floor with id {id} not found.");
+                }
+                else
+                {
+                    serviceResponse.Data = existingFloor;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<List<Floor>?> UpdateFloor(int id, Floor request)
-        {
-            var floor = await _context.Floor.FindAsync(id);
-            if (floor == null)
-                return null;
 
-            floor.Name = request.Name;
-            await _context.SaveChangesAsync();
-            return await _context.Floor.ToListAsync();
+        public async Task<ServiceResponse<Floor>> UpdateFloor(int id, AddFloorDTO floor)
+        {
+            var serviceResponse = new ServiceResponse<Floor>();
+            try
+            {
+                var existingFloor = await _dataContext.Floor.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFloor is null)
+                {
+                    throw new Exception($"Floor with id {id} not found.");
+                }
+                else
+                {
+                    var floorModel = _mapper.Map<Floor>(floor);
+                    existingFloor.Name = floorModel.Name;
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingFloor;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
         }
+
+        public async Task<ServiceResponse<Floor>> DeleteFloor(int id)
+        {
+            var serviceResponse = new ServiceResponse<Floor>();
+            try
+            {
+                var existingFloor = await _dataContext.Floor.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingFloor is null)
+                {
+                    throw new Exception($"Floor with id {id} not found.");
+                }
+                else
+                {
+                    _dataContext.Remove(existingFloor);
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingFloor;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
+        }
+        
     }
 }

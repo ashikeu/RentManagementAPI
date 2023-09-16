@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentManagementAPI.Models.DTOs.Flat;
 using RentManagementAPI.Services.FlatService;
 
 
@@ -9,64 +11,74 @@ namespace RentManagementAPI.Controllers
     [ApiController]
     public class FlatController : ControllerBase
     {
-        private readonly IFlatService _FlatService;
+        private readonly IFlatService _flatService;
+        private readonly IMapper _mapper;
 
-        public FlatController(IFlatService flatService)
+        public FlatController(IFlatService flatService, IMapper mapper)
         {
-            _FlatService = flatService;
+            _flatService = flatService;
+            _mapper = mapper;
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<Flat>>> GetAllFlats()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> Get()
         {
-
-            return await _FlatService.GetAllFlats();
+            var serviceResponse = await _flatService.GetAllFlats();
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpGet("{id}")]
-
-        public async Task<ActionResult<Flat>> GetFlat(int id)
-
+        public async Task<ActionResult<ServiceResponse<Flat>>> GetFlat(int id)
         {
-            var result = await _FlatService.GetFlat(id);
-            return Ok(result);
+            var serviceResponse = await _flatService.GetFlatById(id);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpPost]
-
-        public async Task<ActionResult<List<Flat>>> AddFlat(Flat flat)
-
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> AddFlat([FromBody] AddFlatDTO flat)
         {
-            var result = await _FlatService.AddFlat(flat);
-            return Ok(result);
+            var serviceResponse = await _flatService.AddFlat(flat);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
 
 
-        [HttpPut("{id}")]
-
-        public async Task<ActionResult<List<Flat>>> UpdateFlat(int id, Flat request)
-
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> UpdateFlat([FromRoute] int id, AddFlatDTO flat)
         {
-            var result = await _FlatService.UpdateFlat(id, request);
-            if (result == null)
-                return NotFound("flat not found");
-            return Ok(result);
+            var serviceResponse = await _flatService.UpdateFlat(id, flat);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id}")]
-
-        public async Task<ActionResult<List<Flat>?>> DeleteFlat(int id)
-
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> DeleteFlat([FromRoute] int id)
         {
-            var result = await _FlatService.DeleteFlat(id);
-
-            if (result == null)
-                return NotFound("flat not found");
-            return Ok(result);
-
-
+            var serviceResponse = await _flatService.DeleteFlat(id);
+            if (serviceResponse is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            else
+            {
+                return Ok(serviceResponse);
+            }
 
         }
     }

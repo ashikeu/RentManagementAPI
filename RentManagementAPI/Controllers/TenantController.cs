@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentManagementAPI.Models.DTOs.Tenant;
+using RentManagementAPI.Services.TenantService;
 using RentManagementAPI.Services.TenantService;
 
 namespace RentManagementAPI.Controllers
@@ -8,64 +11,74 @@ namespace RentManagementAPI.Controllers
     [ApiController]
     public class TenantController : ControllerBase
     {
-        private readonly ITenantService _TenantService;
+        private readonly ITenantService _tenantService;
+        private readonly IMapper _mapper;
 
-        public TenantController(ITenantService tenantService)
+        public TenantController(ITenantService tenantService, IMapper mapper)
         {
-            _TenantService = tenantService;
+            _tenantService = tenantService;
+            _mapper = mapper;
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<Tenant>>> GetAllTenants()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> Get()
         {
-
-            return await _TenantService.GetAllTenants();
+            var serviceResponse = await _tenantService.GetAllTenants();
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpGet("{id}")]
-
-        public async Task<ActionResult<Tenant>> GetTenant(int id)
-
+        public async Task<ActionResult<ServiceResponse<Tenant>>> GetTenant(int id)
         {
-            var result = await _TenantService.GetTenant(id);
-            return Ok(result);
+            var serviceResponse = await _tenantService.GetTenantById(id);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpPost]
-
-        public async Task<ActionResult<List<Tenant>>> AddTenant(Tenant tenant)
-
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant([FromBody] AddTenantDTO tenant)
         {
-            var result = await _TenantService.AddTenant(tenant);
-            return Ok(result);
+            var serviceResponse = await _tenantService.AddTenant(tenant);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
 
 
-        [HttpPut("{id}")]
-
-        public async Task<ActionResult<List<Tenant>>> UpdateTenant(int id, Tenant request)
-
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> UpdateTenant([FromRoute] int id, AddTenantDTO tenant)
         {
-            var result = await _TenantService.UpdateTenant(id, request);
-            if (result == null)
-                return NotFound("tenant not found");
-            return Ok(result);
+            var serviceResponse = await _tenantService.UpdateTenant(id, tenant);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id}")]
-
-        public async Task<ActionResult<List<Tenant>?>> DeleteTenant(int id)
-
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> DeleteTenant([FromRoute] int id)
         {
-            var result = await _TenantService.DeleteTenant(id);
-
-            if (result == null)
-                return NotFound("tenant not found");
-            return Ok(result);
-
-
+            var serviceResponse = await _tenantService.DeleteTenant(id);
+            if (serviceResponse is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            else
+            {
+                return Ok(serviceResponse);
+            }
 
         }
     }

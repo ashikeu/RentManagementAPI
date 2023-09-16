@@ -1,6 +1,8 @@
-﻿namespace RentManagementAPI.Models
+﻿namespace RentManagementAPI.Models.DTOs.Flat
+    
 {
-    public class Flat
+    using RentManagementAPI.Models;
+    public class GetFlatDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -9,7 +11,7 @@
         public string FlatSide { get; set; } = string.Empty;
         public int FloorId { get; set; }
 
-        public List<Tenant> Tenants { get; set; } = new List<Tenant>();
-
+        public Floor Floor { get; set; }
+      
     }
 }

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentManagementAPI.Models.DTOs.Deposite;
+using RentManagementAPI.Services.DepositeService;
 using RentManagementAPI.Services.DepositeService;
 
 namespace RentManagementAPI.Controllers
@@ -8,64 +11,74 @@ namespace RentManagementAPI.Controllers
     [ApiController]
     public class DepositeController : ControllerBase
     {
-        private readonly IDepositeService _DepositeService;
+        private readonly IDepositeService _depositeService;
+        private readonly IMapper _mapper;
 
-        public DepositeController(IDepositeService depositeService)
+        public DepositeController(IDepositeService depositeService, IMapper mapper)
         {
-            _DepositeService = depositeService;
+            _depositeService = depositeService;
+            _mapper = mapper;
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<Deposite>>> GetAllDeposites()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<Deposite>>>> Get()
         {
-
-            return await _DepositeService.GetAllDeposites();
+            var serviceResponse = await _depositeService.GetAllDeposites();
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpGet("{id}")]
-
-        public async Task<ActionResult<Deposite>> GetDeposite(int id)
-
+        public async Task<ActionResult<ServiceResponse<Deposite>>> GetDeposite(int id)
         {
-            var result = await _DepositeService.GetDeposite(id);
-            return Ok(result);
+            var serviceResponse = await _depositeService.GetDepositeById(id);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpPost]
-
-        public async Task<ActionResult<List<Deposite>>> AddDeposite(Deposite deposite)
-
+        public async Task<ActionResult<ServiceResponse<List<Deposite>>>> AddDeposite([FromBody] AddDepositeDTO deposite)
         {
-            var result = await _DepositeService.AddDeposite(deposite);
-            return Ok(result);
+            var serviceResponse = await _depositeService.AddDeposite(deposite);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
 
 
-        [HttpPut("{id}")]
-
-        public async Task<ActionResult<List<Deposite>>> UpdateDeposite(int id, Deposite request)
-
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Deposite>>>> UpdateDeposite([FromRoute] int id, AddDepositeDTO deposite)
         {
-            var result = await _DepositeService.UpdateDeposite(id, request);
-            if (result == null)
-                return NotFound(" deposite not found");
-            return Ok(result);
+            var serviceResponse = await _depositeService.UpdateDeposite(id, deposite);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id}")]
-
-        public async Task<ActionResult<List<Deposite>?>> DeleteDeposite(int id)
-
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Deposite>>>> DeleteDeposite([FromRoute] int id)
         {
-            var result = await _DepositeService.DeleteDeposite(id);
-
-            if (result == null)
-                return NotFound(" deposite not found");
-            return Ok(result);
-
-
+            var serviceResponse = await _depositeService.DeleteDeposite(id);
+            if (serviceResponse is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            else
+            {
+                return Ok(serviceResponse);
+            }
 
         }
     }

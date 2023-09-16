@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentManagementAPI.Models.DTOs.Floor;
 using RentManagementAPI.Services.FloorService;
 using System.Xml.Linq;
 
@@ -9,65 +11,75 @@ namespace RentManagementAPI.Controllers
     [ApiController]
     public class FloorController : ControllerBase
     {
-        private readonly IFloorService _FloorService;
+        private readonly IFloorService _floorService;
+        private readonly IMapper _mapper;
 
-        public FloorController(IFloorService floorService) 
+        public FloorController(IFloorService floorService, IMapper mapper)
         {
-            _FloorService = floorService;
+            _floorService = floorService;
+            _mapper = mapper;
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<Floor>>> GetAllFloors()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<Floor>>>> Get()
         {
-
-            return await _FloorService.GetAllFloors();
+            var serviceResponse = await _floorService.GetAllFloors();
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
         [HttpGet("{id}")]
-        
-        public async Task<ActionResult<Floor>> GetFloor(int id)
-
+        public async Task<ActionResult<ServiceResponse<Floor>>> GetFloor(int id)
         {
-           var result = await _FloorService.GetFloor(id);
-            return Ok(result);
+            var serviceResponse = await _floorService.GetFloorById(id);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
-       
+
         [HttpPost]
-
-        public async Task<ActionResult<List<Floor>>> AddFloor(Floor floor)
-
+        public async Task<ActionResult<ServiceResponse<List<Floor>>>> AddFloor([FromBody] AddFloorDTO floor)
         {
-           var result = await _FloorService.AddFloor(floor);
-            return Ok(result);
+            var serviceResponse = await _floorService.AddFloor(floor);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
-        
-        
-        [HttpPut("{id}")]
 
-        public async Task<ActionResult<List<Floor>>> UpdateFloor(int id, Floor request)
 
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Floor>>>> UpdateFloor([FromRoute] int id, AddFloorDTO floor)
         {
-            var result = await _FloorService.UpdateFloor(id, request);
-            if (result == null) 
-                return NotFound("floor not found");
-            return Ok(result);
+            var serviceResponse = await _floorService.UpdateFloor(id, floor);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id}")]
-
-        public async Task<ActionResult<List<Floor>?>> DeleteFloor(int id)
-
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ServiceResponse<List<Floor>>>> DeleteFloor([FromRoute] int id)
         {
-            var result = await _FloorService.DeleteFloor(id);
+            var serviceResponse = await _floorService.DeleteFloor(id);
+            if (serviceResponse is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            else
+            {
+                return Ok(serviceResponse);
+            }
 
-            if (result == null)
-                return NotFound("floor not found");
-            return Ok(result);  
-
-
-           
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿namespace RentManagementAPI.Services.RentService
+﻿using RentManagementAPI.Models.DTOs.Rent;
+
+namespace RentManagementAPI.Services.RentService
 {
     public interface IRentService
     {
-        Task<List<Rent>> GetAllRents();
-
-        Task<Rent> GetRent(int id);
-
-        Task<List<Rent>> AddRent(Rent rent);
-
-        Task<List<Rent>> UpdateRent(int id, Rent request);
-        Task<List<Rent>> DeleteRent(int id);
+        Task<ServiceResponse<List<Rent>>> GetAllRents();
+        Task<ServiceResponse<Rent>> GetRentById(int id);
+        Task<ServiceResponse<Rent>> AddRent(AddRentDTO rent);
+        Task<ServiceResponse<Rent>> UpdateRent(int id, AddRentDTO rent);
+        Task<ServiceResponse<Rent>> DeleteRent(int id);
     }
 }

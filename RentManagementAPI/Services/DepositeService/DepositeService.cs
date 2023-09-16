@@ -1,66 +1,140 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using RentManagementAPI.Models.DTOs.Deposite;
 
 namespace RentManagementAPI.Services.DepositeService
 {
     public class DepositeService : IDepositeService
     {
-        private readonly DataContext _context;
-        public DepositeService(DataContext context)
+        private readonly DataContext _dataContext;
+        private readonly IMapper _mapper;
+        public DepositeService(DataContext dataContext, IMapper mapper)
         {
-            _context = context;
+            _dataContext = dataContext;
+            _mapper = mapper;
         }
-        public async Task<List<Deposite>> AddDeposite(Deposite deposite)
+        public async Task<ServiceResponse<Deposite>> AddDeposite(AddDepositeDTO deposite)
         {
-            _context.Deposite.Add(deposite);
-            await _context.SaveChangesAsync();
-            return await _context.Deposite.ToListAsync();
-        }
+            var serviceResponse = new ServiceResponse<Deposite>();
+            try
+            {
+                var depositeModel = _mapper.Map<Deposite>(deposite);
+                await _dataContext.Deposite.AddAsync(depositeModel);
+                await _dataContext.SaveChangesAsync();
+                serviceResponse.Data = depositeModel;
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
 
-        public async Task<List<Deposite>?> DeleteDeposite(int id)
-
-
-        {
-            var deposite = await _context.Deposite.FindAsync(id);
-            if (deposite == null)
-                return null;
-
-            _context.Deposite.Remove(deposite);
-
-            _context.SaveChanges();
-            return await _context.Deposite.ToListAsync();
-
-
-
-
+            return serviceResponse;
         }
 
-        public async Task<List<Deposite>> GetAllDeposites()
-
+        public async Task<ServiceResponse<List<Deposite>>> GetAllDeposites()
         {
+            var serviceResponse = new ServiceResponse<List<Deposite>>();
+            try
+            {
+                var deposites = await _dataContext.Deposite.ToListAsync();
 
-            return await _context.Deposite.ToListAsync();
+                if (deposites != null && deposites.Count == 0)
+                {
+                    serviceResponse.Data = null;
+                    throw new Exception($"No data found.");
+                }
+                else
+                {
+                    serviceResponse.Data = deposites;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<Deposite?> GetDeposite(int id)
+        public async Task<ServiceResponse<Deposite>> GetDepositeById(int id)
         {
-            var deposite = await _context.Deposite.FindAsync(id);
-            if (deposite == null)
-                return null;
-            return deposite;
+            var serviceResponse = new ServiceResponse<Deposite>();
+            try
+            {
+                var existingDeposite = await _dataContext.Deposite.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingDeposite is null)
+                {
+                    throw new Exception($"Deposite with id {id} not found.");
+                }
+                else
+                {
+                    serviceResponse.Data = existingDeposite;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
 
-        public async Task<List<Deposite>?> UpdateDeposite(int id, Deposite request)
-        {
-            var deposite = await _context.Deposite.FindAsync(id);
-            if (deposite == null)
-                return null;
 
-            deposite.TotalAmount = request.TotalAmount;
-            deposite.DepositeAmount = request.DepositeAmount; 
-            deposite.DueAmount = request.DueAmount;
-            deposite.DepositeDate = request.DepositeDate;
-            await _context.SaveChangesAsync();
-            return await _context.Deposite.ToListAsync();
+        public async Task<ServiceResponse<Deposite>> UpdateDeposite(int id, AddDepositeDTO deposite)
+        {
+            var serviceResponse = new ServiceResponse<Deposite>();
+            try
+            {
+                var existingDeposite = await _dataContext.Deposite.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingDeposite is null)
+                {
+                    throw new Exception($"Deposite with id {id} not found.");
+                }
+                else
+                {
+                    var depositeModel = _mapper.Map<Deposite>(deposite);
+                    existingDeposite.TotalAmount = depositeModel.TotalAmount;
+                    existingDeposite.DepositeAmount = depositeModel.DepositeAmount;
+                    existingDeposite.DueAmount = depositeModel.DueAmount;
+                    existingDeposite.DepositeDate = depositeModel.DepositeDate;
+                    existingDeposite.RentId = depositeModel.RentId;
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingDeposite;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<Deposite>> DeleteDeposite(int id)
+        {
+            var serviceResponse = new ServiceResponse<Deposite>();
+            try
+            {
+                var existingDeposite = await _dataContext.Deposite.FirstOrDefaultAsync(x => x.Id == id);
+                if (existingDeposite is null)
+                {
+                    throw new Exception($"Deposite with id {id} not found.");
+                }
+                else
+                {
+                    _dataContext.Remove(existingDeposite);
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.Data = existingDeposite;
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
     } 
 }

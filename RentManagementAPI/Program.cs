@@ -1,5 +1,7 @@
 global using RentManagementAPI.Models;
 global using RentManagementAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using RentManagementAPI.Mapping;
 using RentManagementAPI.Services.FloorService;
 using RentManagementAPI.Services.FlatService;
 using RentManagementAPI.Services.RentService;
@@ -19,6 +21,7 @@ builder.Services.AddScoped<IFlatService, FlatService>();
 builder.Services.AddScoped<IRentService, RentService>();
 builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IDepositeService, DepositeService>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();

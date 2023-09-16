@@ -1,15 +1,14 @@
-﻿namespace RentManagementAPI.Services.DepositeService
+﻿using RentManagementAPI.Models.DTOs.Deposite;
+
+namespace RentManagementAPI.Services.DepositeService
 {
     public interface IDepositeService
     {
-        Task<List<Deposite>> GetAllDeposites();
-
-        Task<Deposite> GetDeposite(int id);
-
-        Task<List<Deposite>> AddDeposite(Deposite deposite);
-
-        Task<List<Deposite>> UpdateDeposite(int id, Deposite request);
-        Task<List<Deposite>> DeleteDeposite(int id);
+        Task<ServiceResponse<List<Deposite>>> GetAllDeposites();
+        Task<ServiceResponse<Deposite>> GetDepositeById(int id);
+        Task<ServiceResponse<Deposite>> AddDeposite(AddDepositeDTO deposite);
+        Task<ServiceResponse<Deposite>> UpdateDeposite(int id, AddDepositeDTO deposite);
+        Task<ServiceResponse<Deposite>> DeleteDeposite(int id);
 
     }
 }

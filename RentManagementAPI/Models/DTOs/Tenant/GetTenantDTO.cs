@@ -1,8 +1,7 @@
-﻿using System;
-
-namespace RentManagementAPI.Models
+﻿namespace RentManagementAPI.Models.DTOs.Tenant
 {
-    public class Tenant
+    using RentManagementAPI.Models;
+    public class GetTenantDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -18,7 +17,6 @@ namespace RentManagementAPI.Models
         public double WaterBill { get; set; }
         public double TotalAmount { get; set; }
         public int FlatId { get; set; }
-        public List<Rent> Rents { get; set; } = new List<Rent>();
-
+        public Flat Flat { get; set; }
     }
 }
