@@ -65,7 +65,8 @@ namespace RentManagementAPI.Migrations
                     GasBill = table.Column<double>(type: "float", nullable: false),
                     WaterBill = table.Column<double>(type: "float", nullable: false),
                     TotalAmount = table.Column<double>(type: "float", nullable: false),
-                    FlatId = table.Column<int>(type: "int", nullable: false)
+                    FlatId = table.Column<int>(type: "int", nullable: false),
+                    FloorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,19 +95,12 @@ namespace RentManagementAPI.Migrations
                 {
                     table.PrimaryKey("PK_Rent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rent_Flat_FlatId",
-                        column: x => x.FlatId,
-                        principalTable: "Flat",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Rent_Tenant_TenantId",
                         column: x => x.TenantId,
                         principalTable: "Tenant",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
-           
 
             migrationBuilder.CreateTable(
                 name: "Deposite",
@@ -117,7 +111,7 @@ namespace RentManagementAPI.Migrations
                     TotalAmount = table.Column<double>(type: "float", nullable: false),
                     DepositeAmount = table.Column<double>(type: "float", nullable: false),
                     DueAmount = table.Column<double>(type: "float", nullable: false),
-                    DepositeDatet = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DepositeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -142,11 +136,6 @@ namespace RentManagementAPI.Migrations
                 column: "FloorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rent_FlatId",
-                table: "Rent",
-                column: "FlatId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rent_TenantId",
                 table: "Rent",
                 column: "TenantId");
@@ -154,8 +143,7 @@ namespace RentManagementAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tenant_FlatId",
                 table: "Tenant",
-                column: "FlatId",
-                unique: true);
+                column: "FlatId");
         }
 
         /// <inheritdoc />

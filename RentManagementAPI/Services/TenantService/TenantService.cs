@@ -108,6 +108,7 @@ namespace RentManagementAPI.Services.TenantService
                     existingTenant.GasBill = tenantModel.GasBill;
                     existingTenant.WaterBill = tenantModel.WaterBill;
                     existingTenant.TotalAmount = tenantModel.TotalAmount;
+                    existingTenant.FloorId = tenantModel.FloorId;
                     existingTenant.FlatId = tenantModel.FlatId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingTenant;

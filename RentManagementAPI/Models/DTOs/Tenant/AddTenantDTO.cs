@@ -14,6 +14,8 @@
         public double GasBill { get; set; }
         public double WaterBill { get; set; }
         public double TotalAmount { get; set; }
+        public int FloorId { get; set; }
         public int FlatId { get; set; }
+
     }
 }

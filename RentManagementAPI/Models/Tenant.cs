@@ -18,6 +18,9 @@ namespace RentManagementAPI.Models
         public double WaterBill { get; set; }
         public double TotalAmount { get; set; }
         public int FlatId { get; set; }
+        
+        public int FloorId { get; set; }
+        
         public List<Rent> Rents { get; set; } = new List<Rent>();
 
     }

@@ -12,7 +12,7 @@ using RentManagementAPI.Data;
 namespace RentManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230913190144_InitialCreate")]
+    [Migration("20230916195744_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace RentManagementAPI.Migrations
                     b.Property<double>("DepositeAmount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("DepositeDatet")
+                    b.Property<DateTime>("DepositeDate")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("DueAmount")
@@ -129,8 +129,6 @@ namespace RentManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FlatId");
-
                     b.HasIndex("TenantId");
 
                     b.ToTable("Rent");
@@ -155,6 +153,9 @@ namespace RentManagementAPI.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("FlatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FloorId")
                         .HasColumnType("int");
 
                     b.Property<double>("GasBill")
@@ -190,67 +191,50 @@ namespace RentManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FlatId")
-                        .IsUnique();
+                    b.HasIndex("FlatId");
 
                     b.ToTable("Tenant");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Deposite", b =>
                 {
-                    b.HasOne("RentManagementAPI.Models.Rent", "Rent")
+                    b.HasOne("RentManagementAPI.Models.Rent", null)
                         .WithMany("Deposites")
                         .HasForeignKey("RentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Rent");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Flat", b =>
                 {
-                    b.HasOne("RentManagementAPI.Models.Floor", "Floor")
+                    b.HasOne("RentManagementAPI.Models.Floor", null)
                         .WithMany("Flats")
                         .HasForeignKey("FloorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Floor");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Rent", b =>
                 {
-                    b.HasOne("RentManagementAPI.Models.Flat", "Flat")
-                        .WithMany()
-                        .HasForeignKey("FlatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentManagementAPI.Models.Tenant", "Tenant")
-                        .WithMany()
+                    b.HasOne("RentManagementAPI.Models.Tenant", null)
+                        .WithMany("Rents")
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Flat");
-
-                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Tenant", b =>
                 {
-                    b.HasOne("RentManagementAPI.Models.Flat", "Flat")
-                        .WithOne("Tenant")
-                        .HasForeignKey("RentManagementAPI.Models.Tenant", "FlatId")
+                    b.HasOne("RentManagementAPI.Models.Flat", null)
+                        .WithMany("Tenants")
+                        .HasForeignKey("FlatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Flat");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Flat", b =>
                 {
-                    b.Navigation("Tenant");
+                    b.Navigation("Tenants");
                 });
 
             modelBuilder.Entity("RentManagementAPI.Models.Floor", b =>
@@ -261,6 +245,11 @@ namespace RentManagementAPI.Migrations
             modelBuilder.Entity("RentManagementAPI.Models.Rent", b =>
                 {
                     b.Navigation("Deposites");
+                });
+
+            modelBuilder.Entity("RentManagementAPI.Models.Tenant", b =>
+                {
+                    b.Navigation("Rents");
                 });
 #pragma warning restore 612, 618
         }

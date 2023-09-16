@@ -8,7 +8,6 @@
         public int FlatSize { get; set; }
         public string FlatSide { get; set; } = string.Empty;
         public int FloorId { get; set; }
-
         public List<Tenant> Tenants { get; set; } = new List<Tenant>();
 
     }
