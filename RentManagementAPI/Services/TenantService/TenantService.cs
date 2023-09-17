@@ -104,11 +104,11 @@ namespace RentManagementAPI.Services.TenantService
                     existingTenant.NoofFamilyMember = tenantModel.NoofFamilyMember;
                     existingTenant.ArrivalDate = tenantModel.ArrivalDate;
                     existingTenant.RentAmount = tenantModel.RentAmount;
-                    existingTenant.ElectricityBill = tenantModel.ElectricityBill;
+                    existingTenant.UtilityBill = tenantModel.UtilityBill;
                     existingTenant.GasBill = tenantModel.GasBill;
                     existingTenant.WaterBill = tenantModel.WaterBill;
                     existingTenant.TotalAmount = tenantModel.TotalAmount;
-                    existingTenant.FloorId = tenantModel.FloorId;
+                    
                     existingTenant.FlatId = tenantModel.FlatId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingTenant;
