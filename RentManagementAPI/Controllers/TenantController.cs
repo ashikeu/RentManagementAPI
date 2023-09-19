@@ -21,7 +21,8 @@ namespace RentManagementAPI.Controllers
         }
 
 
-        [HttpGet("GetAll")]
+        [HttpGet]
+        [Route("GetAllTenant")]
         public async Task<ActionResult<ServiceResponse<List<Tenant>>>> Get()
         {
             var serviceResponse = await _tenantService.GetAllTenants();
@@ -32,7 +33,8 @@ namespace RentManagementAPI.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetSingleTenant/{id}")]
         public async Task<ActionResult<ServiceResponse<Tenant>>> GetTenant(int id)
         {
             var serviceResponse = await _tenantService.GetTenantById(id);
@@ -44,6 +46,7 @@ namespace RentManagementAPI.Controllers
         }
 
         [HttpPost]
+        [Route("CreateTenant")]
         public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant([FromBody] AddTenantDTO tenant)
         {
             var serviceResponse = await _tenantService.AddTenant(tenant);
@@ -56,7 +59,8 @@ namespace RentManagementAPI.Controllers
 
 
 
-        [HttpPut("{id:int}")]
+        [HttpPut]
+        [Route("UpdateTenant/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Tenant>>>> UpdateTenant([FromRoute] int id, AddTenantDTO tenant)
         {
             var serviceResponse = await _tenantService.UpdateTenant(id, tenant);
@@ -67,7 +71,8 @@ namespace RentManagementAPI.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete]
+        [Route("DeleteTenant/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Tenant>>>> DeleteTenant([FromRoute] int id)
         {
             var serviceResponse = await _tenantService.DeleteTenant(id);

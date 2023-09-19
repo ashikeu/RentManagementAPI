@@ -21,7 +21,8 @@ namespace RentManagementAPI.Controllers
         }
 
 
-        [HttpGet("GetAll")]
+        [HttpGet]
+        [Route("GetAllDeposite")]
         public async Task<ActionResult<ServiceResponse<List<Deposite>>>> Get()
         {
             var serviceResponse = await _depositeService.GetAllDeposites();
@@ -32,7 +33,8 @@ namespace RentManagementAPI.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetSingleDeposite/{id}")]
         public async Task<ActionResult<ServiceResponse<Deposite>>> GetDeposite(int id)
         {
             var serviceResponse = await _depositeService.GetDepositeById(id);
@@ -44,6 +46,7 @@ namespace RentManagementAPI.Controllers
         }
 
         [HttpPost]
+        [Route("CreateDeposite")]
         public async Task<ActionResult<ServiceResponse<List<Deposite>>>> AddDeposite([FromBody] AddDepositeDTO deposite)
         {
             var serviceResponse = await _depositeService.AddDeposite(deposite);
@@ -56,7 +59,9 @@ namespace RentManagementAPI.Controllers
 
 
 
-        [HttpPut("{id:int}")]
+
+        [HttpPut]
+        [Route("UpdateDeposite/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Deposite>>>> UpdateDeposite([FromRoute] int id, AddDepositeDTO deposite)
         {
             var serviceResponse = await _depositeService.UpdateDeposite(id, deposite);
@@ -67,7 +72,8 @@ namespace RentManagementAPI.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete]
+        [Route("DeleteDeposite/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Deposite>>>> DeleteDeposite([FromRoute] int id)
         {
             var serviceResponse = await _depositeService.DeleteDeposite(id);

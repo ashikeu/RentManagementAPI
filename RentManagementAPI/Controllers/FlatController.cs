@@ -21,7 +21,8 @@ namespace RentManagementAPI.Controllers
         }
 
 
-        [HttpGet("GetAll")]
+        [HttpGet]
+        [Route("GetAllFlat")]
         public async Task<ActionResult<ServiceResponse<List<Flat>>>> Get()
         {
             var serviceResponse = await _flatService.GetAllFlats();
@@ -31,8 +32,8 @@ namespace RentManagementAPI.Controllers
             }
             return Ok(serviceResponse);
         }
-
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetSingleFlat/{id}")]
         public async Task<ActionResult<ServiceResponse<Flat>>> GetFlat(int id)
         {
             var serviceResponse = await _flatService.GetFlatById(id);
@@ -44,6 +45,7 @@ namespace RentManagementAPI.Controllers
         }
 
         [HttpPost]
+        [Route("CreateFlat")]
         public async Task<ActionResult<ServiceResponse<List<Flat>>>> AddFlat([FromBody] AddFlatDTO flat)
         {
             var serviceResponse = await _flatService.AddFlat(flat);
@@ -55,8 +57,8 @@ namespace RentManagementAPI.Controllers
         }
 
 
-
-        [HttpPut("{id:int}")]
+        [HttpPut]
+        [Route("UpdateFlat/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Flat>>>> UpdateFlat([FromRoute] int id, AddFlatDTO flat)
         {
             var serviceResponse = await _flatService.UpdateFlat(id, flat);
@@ -67,7 +69,9 @@ namespace RentManagementAPI.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpDelete("{id:int}")]
+
+        [HttpDelete]
+        [Route("DeleteFlat/{id}")]
         public async Task<ActionResult<ServiceResponse<List<Flat>>>> DeleteFlat([FromRoute] int id)
         {
             var serviceResponse = await _flatService.DeleteFlat(id);
