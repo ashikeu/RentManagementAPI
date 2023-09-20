@@ -10,6 +10,7 @@ namespace RentManagementAPI.Models
         public string PassportNo { get; set; } = string.Empty;
         public string BirthCertificateNo { get; set; } = string.Empty;
         public string MobileNo { get; set; } = string.Empty;
+        public string EmgMobileNo { get; set; } = string.Empty;
         public int NoofFamilyMember { get; set; }
         public DateTime ArrivalDate { get; set; }
         public double RentAmount { get; set; }
