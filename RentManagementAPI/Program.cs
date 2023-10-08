@@ -7,6 +7,14 @@ using RentManagementAPI.Services.FlatService;
 using RentManagementAPI.Services.RentService;
 using RentManagementAPI.Services.TenantService;
 using RentManagementAPI.Services.DepositeService;
+using System.Reflection;
+using RentManagementAPI.Services.PropertyInfo;
+using System.Collections.Generic;
+using RentManagementAPI.Services.UserService;
+using RentManagementAPI.Services.BuildingService;
+using RentManagementAPI.Services.IncomeExpenseService;
+using RentManagementAPI.Services.IncomeExpenseTransactionService;
+using RentManagementAPI.Services.ReportService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +29,12 @@ builder.Services.AddScoped<IFlatService, FlatService>();
 builder.Services.AddScoped<IRentService, RentService>();
 builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IDepositeService, DepositeService>();
+builder.Services.AddScoped<IPropertyInfoService, PropertyInfoService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBuildingService, BuildingService>();
+builder.Services.AddScoped<IIncomeExpenseService, IncomeExpenseService>();
+builder.Services.AddScoped<IIncomeExpenseTransactionService, IncomeExpenseTransactionService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddDbContext<DataContext>();
 
