@@ -11,7 +11,7 @@ namespace RentManagementAPI.Models
         public double RentAmount { get; set; }
         public double GasBill { get; set; }
         public double WaterBill { get; set; }
-        public double ServiceCharge { get; set; }
+        public double ServiceCharge { get; set; } 
         public double TotalAmount { get; set; }
         public double DueAmount  { get; set; }
         public bool IsPaid { get; set; }
@@ -21,7 +21,7 @@ namespace RentManagementAPI.Models
         public bool IsPrinted { get; set; }
         public string ReciptNo { get; set; } = string.Empty;
 
-
+        public Flat Flat { get; set; }
         public List<Deposite> Deposits { get; set; }
     }
 }

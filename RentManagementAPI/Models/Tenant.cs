@@ -3,12 +3,12 @@
 namespace RentManagementAPI.Models
 {
     public class Tenant
-    {
+    { 
         public int Id { get; set; }
 
         public int UserId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string NID { get; set; } = string.Empty;
+        public string NID { get; set; } = string.Empty; 
         public string PassportNo { get; set; } = string.Empty;
         public string BirthCertificateNo { get; set; } = string.Empty;
         public string MobileNo { get; set; } = string.Empty;
@@ -19,8 +19,10 @@ namespace RentManagementAPI.Models
         public double AdvanceAmount { get; set; }
         public bool IsActive { get; set; }
         public ByteArrayContent TenantImage { get; set; }
-        public ByteArrayContent TenantIdImage { get; set; }
+        public ByteArrayContent TenantNidImage { get; set; }
         public DateTime RentAmountChangeDate { get; set; }
+
+        public Flat Flat { get; set; }
 
         //public double UtilityBill { get; set; }
         // public double GasBill { get; set; }

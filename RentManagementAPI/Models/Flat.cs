@@ -6,7 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public int MasterbedRoom { get; set; }
 
-        public int Bedroom { get; set; }
+        public int Bedroom { get; set; } 
 
         public int Washroom { get; set; }
         public int FlatSize { get; set; }
@@ -19,6 +19,8 @@
         public double GasBill { get; set; }
         public double WaterBill { get; set; }
         public double ServiceCharge { get; set; }
+
+        public Floor Floor { get; set; }
         public List<Rent> Rents { get; set; } = new List<Rent>();
 
         public List<Tenant> Tenants { get; set; } = new List<Tenant>();

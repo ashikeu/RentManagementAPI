@@ -97,10 +97,13 @@ namespace RentManagementAPI.Services.FloorService
                 else
                 {
                     var floorModel = _mapper.Map<Floor>(floor);
-                    existingFloor.Name = floorModel.Name;
+                    existingFloor.Name = floorModel.Name; 
+                    existingFloor.IsActive= floorModel.IsActive;
+                    existingFloor.UserId= floorModel.UserId;
+                    existingFloor.BuildingId= floorModel.BuildingId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingFloor;
-                }
+                } 
             }
             catch (Exception ex)
             {

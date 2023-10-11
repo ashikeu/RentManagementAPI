@@ -2,10 +2,11 @@
 {
     public class AddDepositeDTO
     {
+        public int UserId { get; set; }
         public double TotalAmount { get; set; }
-        public double DepositeAmount { get; set; } 
+        public double DepositeAmount { get; set; }
         public double DueAmount { get; set; }
-        public DateTime DepositeDate { get; set; }
+        public DateTime TranDate { get; set; }
         public int RentId { get; set; }
     }
 }

@@ -95,9 +95,10 @@ namespace RentManagementAPI.Services.DepositeService
                 {
                     var depositeModel = _mapper.Map<Deposite>(deposite);
                     existingDeposite.TotalAmount = depositeModel.TotalAmount;
+                    existingDeposite.UserId= depositeModel.UserId;
                     existingDeposite.DepositeAmount = depositeModel.DepositeAmount;
                     existingDeposite.DueAmount = depositeModel.DueAmount;
-                    existingDeposite.DepositeDate = depositeModel.DepositeDate;
+                    existingDeposite.TranDate = depositeModel.TranDate; 
                     existingDeposite.RentId = depositeModel.RentId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingDeposite;

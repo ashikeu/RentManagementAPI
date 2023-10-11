@@ -38,7 +38,7 @@ namespace RentManagementAPI.Services.TenantService
             try
             {
                 var tenants = await _dataContext.Tenant
-                        .Include(rnt => rnt.Rents)
+                        .Include(flat => flat.Flats) 
                         .ToListAsync();
 
                 if (tenants != null && tenants.Count == 0)
@@ -103,13 +103,20 @@ namespace RentManagementAPI.Services.TenantService
                     existingTenant.MobileNo = tenantModel.MobileNo;
                     existingTenant.NoofFamilyMember = tenantModel.NoofFamilyMember;
                     existingTenant.ArrivalDate = tenantModel.ArrivalDate;
-                    existingTenant.RentAmount = tenantModel.RentAmount;
+                    existingTenant.AdvanceAmount= tenantModel.AdvanceAmount;
+                    existingTenant.IsActive= tenantModel.IsActive;
+                    existingTenant.TenantNidImage= tenantModel.TenantNidImage;
+                    existingTenant.TenantImage = tenantModel.TenantImage;
+                    existingTenant.RentAmountChangeDate = tenantModel.RentAmountChangeDate;
+                    existingTenant.UserId= tenantModel.UserId;
+                    existingTenant.EmgMobileNo= tenantModel.EmgMobileNo;
+                    /*existingTenant.RentAmount = tenantModel.RentAmount;
                     existingTenant.UtilityBill = tenantModel.UtilityBill;
                     existingTenant.GasBill = tenantModel.GasBill;
                     existingTenant.WaterBill = tenantModel.WaterBill;
                     existingTenant.TotalAmount = tenantModel.TotalAmount;
                     
-                    existingTenant.FlatId = tenantModel.FlatId;
+                    existingTenant.FlatId = tenantModel.FlatId;*/
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingTenant;
                 }

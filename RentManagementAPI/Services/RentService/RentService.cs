@@ -17,7 +17,7 @@ namespace RentManagementAPI.Services.RentService
         {
             var serviceResponse = new ServiceResponse<Rent>();
             try
-            {
+            { 
                 var rentModel = _mapper.Map<Rent>(rent);
                 await _dataContext.Rent.AddAsync(rentModel);
                 await _dataContext.SaveChangesAsync();
@@ -38,7 +38,7 @@ namespace RentManagementAPI.Services.RentService
             try
             {
                 var rents = await _dataContext.Rent
-                        .Include(dpst => dpst.Deposites)
+                        .Include(dpst => dpst.Deposits)
                         .ToListAsync();
 
                 if (rents != null && rents.Count == 0)
@@ -97,10 +97,19 @@ namespace RentManagementAPI.Services.RentService
                 {
                     var rentModel = _mapper.Map<Rent>(rent);
                     existingRent.RentMonth = rentModel.RentMonth;
+                    existingRent.ServiceCharge = rentModel.ServiceCharge;
+                    existingRent.WaterBill= rentModel.WaterBill;
+                    existingRent.GasBill= rentModel.GasBill;
+                    existingRent.RentAmount= rentModel.RentAmount;
                     existingRent.TotalAmount = rentModel.TotalAmount;
+                    existingRent.DueAmount= rentModel.DueAmount;
+                    existingRent.UserId= rentModel.UserId;
+                    existingRent.IsPrinted= rentModel.IsPrinted;
+                    existingRent.ReciptNo= rentModel.ReciptNo;
                     existingRent.IsPaid = rentModel.IsPaid;
                     existingRent.FlatId = rentModel.FlatId;
                     existingRent.TenantId = rentModel.TenantId;
+
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingRent;
                 }

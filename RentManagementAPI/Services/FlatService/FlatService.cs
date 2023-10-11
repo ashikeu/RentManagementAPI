@@ -16,7 +16,7 @@ namespace RentManagementAPI.Services.FlatService
         }
         public async Task<ServiceResponse<Flat>> AddFlat(AddFlatDTO flat)
         {
-            var serviceResponse = new ServiceResponse<Flat>();
+            var serviceResponse = new ServiceResponse<Flat>(); 
             try
             {
                 var flatModel = _mapper.Map<Flat>(flat);
@@ -38,7 +38,7 @@ namespace RentManagementAPI.Services.FlatService
             var serviceResponse = new ServiceResponse<List<Flat>>();
             try
             {
-                var flats = await _dataContext.Flat.Include(tnt => tnt.Tenants).ToListAsync();
+                var flats = await _dataContext.Flat.Include(tnt => tnt.Tenants).Include(rnt => rnt.Rents).ToListAsync();
 
                 if (flats != null && flats.Count == 0)
                 {
@@ -97,9 +97,18 @@ namespace RentManagementAPI.Services.FlatService
                     var FlatModel = _mapper.Map<Flat>(flat);
                     existingFlat.Name = FlatModel.Name;
                     existingFlat.MasterbedRoom = FlatModel.MasterbedRoom;
+                    existingFlat.Bedroom= FlatModel.Bedroom;
+                    existingFlat.Washroom= FlatModel.Washroom;
                     existingFlat.FlatSize = FlatModel.FlatSize;
                     existingFlat.FlatSide = FlatModel.FlatSide;
                     existingFlat.FloorId = FlatModel.FloorId;
+                    existingFlat.UserId= FlatModel.UserId;
+                    existingFlat.TenantId= FlatModel.TenantId;
+                    existingFlat.IsActive= FlatModel.IsActive;
+                    existingFlat.GasBill= FlatModel.GasBill;
+                    existingFlat.WaterBill= FlatModel.WaterBill;
+                    existingFlat.ServiceCharge= FlatModel.ServiceCharge;
+                    existingFlat.RentAmount= FlatModel.RentAmount;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingFlat;
                 }
