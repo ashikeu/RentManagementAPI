@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentManagementAPI.Models.DTOs.PropertyInfo;
-using RentManagementAPI.Services.PropertyInfo;
-
+using RentManagementAPI.Services.PropertyInfoService;
 
 namespace RentManagementAPI.Controllers
 {

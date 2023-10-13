@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentManagementAPI.Models.DTOs.Deposite;
 using RentManagementAPI.Services.DepositeService;
-using RentManagementAPI.Services.DepositeService;
+
 
 namespace RentManagementAPI.Controllers
 {

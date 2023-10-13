@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentManagementAPI.Models.DTOs.Rent;
 using RentManagementAPI.Services.RentService;
-using RentManagementAPI.Services.RentService;
+
 
 namespace RentManagementAPI.Controllers
 {
