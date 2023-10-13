@@ -8,12 +8,14 @@
 
         public string Password { get; set; } = string.Empty;
 
-        public bool Isactive { get; set; }
+        public bool IsActive { get; set; } 
         public string Email { get; set; } = string.Empty;
         public string MobileNo { get; set; } = string.Empty;
         public bool IsLoggedIn { get; set; }
         public bool IsRegularUser { get; set; }
         public bool IsAdmin { get; set; }
+
+        public Building Building { get; set; }
 
 
     }

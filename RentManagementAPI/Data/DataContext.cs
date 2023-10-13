@@ -27,6 +27,6 @@ namespace RentManagementAPI.Data
         public DbSet<Deposite> Deposite { get; set; }
         public DbSet<IncomeExpense> IncomeExpense { get; set; }
         public DbSet<IncomeExpenseTransaction> IncomeExpenseTransaction { get; set; }
-        public DbSet<Report> Report { get; set; }
+        /*public DbSet<Report> Report { get; set; }*/
     }
 }

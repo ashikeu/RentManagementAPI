@@ -1,15 +1,12 @@
 global using RentManagementAPI.Models;
 global using RentManagementAPI.Data;
-using Microsoft.EntityFrameworkCore;
 using RentManagementAPI.Mapping;
 using RentManagementAPI.Services.FloorService;
 using RentManagementAPI.Services.FlatService;
 using RentManagementAPI.Services.RentService;
 using RentManagementAPI.Services.TenantService;
 using RentManagementAPI.Services.DepositeService;
-using System.Reflection;
-using RentManagementAPI.Services.PropertyInfo;
-using System.Collections.Generic;
+using RentManagementAPI.Services.PropertyInfoService;
 using RentManagementAPI.Services.UserService;
 using RentManagementAPI.Services.BuildingService;
 using RentManagementAPI.Services.IncomeExpenseService;

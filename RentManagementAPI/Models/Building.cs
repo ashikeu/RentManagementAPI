@@ -6,9 +6,9 @@
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public int UserId { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } 
         public Floor Floor { get; set; }
-        public List<Floor> FloorList { get; set; } = new List<Floor>();
+        public List<Floor> Floors { get; set; } = new List<Floor>();
 
     }
 }

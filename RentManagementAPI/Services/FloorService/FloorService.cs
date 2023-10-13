@@ -7,7 +7,7 @@ namespace RentManagementAPI.Services.FloorService
     public class FloorService : IFloorService
     {
        
-        private readonly DataContext _dataContext;
+        private readonly DataContext _dataContext; 
         private readonly IMapper _mapper;
         public FloorService(DataContext dataContext, IMapper mapper)
         {
