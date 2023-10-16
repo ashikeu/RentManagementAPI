@@ -56,6 +56,17 @@ namespace RentManagementAPI.Controllers
             }
             return Ok(serviceResponse);
         }
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<ServiceResponse<User>>> Login([FromBody] LogInDTO user)
+        {
+            var serviceResponse = await _userService.Login(user);
+            if (serviceResponse.Data is null)
+            {
+                return NotFound(serviceResponse);
+            }
+            return Ok(serviceResponse);
+        }
 
 
 

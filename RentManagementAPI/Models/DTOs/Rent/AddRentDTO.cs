@@ -14,6 +14,5 @@
         public int UserId { get; set; }
         public int TenantId { get; set; }
         public bool IsPrinted { get; set; }
-        public string ReciptNo { get; set; } = string.Empty;
     }
 }

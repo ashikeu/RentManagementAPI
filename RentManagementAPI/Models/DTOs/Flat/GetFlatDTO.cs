@@ -6,7 +6,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int MasterbedRoom { get; set; }
+        public int MasterbedRoom { get; set; } 
 
         public int Bedroom { get; set; }
 
@@ -23,6 +23,7 @@
         public double ServiceCharge { get; set; }
 
         public Floor Floor { get; set; }
-      
+        public Tenant Tenant { get; set; }
+
     }
 }

@@ -38,7 +38,7 @@ namespace RentManagementAPI.Services.FlatService
             var serviceResponse = new ServiceResponse<List<Flat>>();
             try
             {
-                var flats = await _dataContext.Flat.Include(tnt => tnt.Tenants).Include(rnt => rnt.Rents).ToListAsync();
+                var flats = await _dataContext.Flat.Include(tnt => tnt.Tenant).Include(flr => flr.Floor).ToListAsync();
 
                 if (flats != null && flats.Count == 0)
                 {
@@ -91,7 +91,7 @@ namespace RentManagementAPI.Services.FlatService
                 if (existingFlat is null)
                 {
                     throw new Exception($"Flat with id {id} not found.");
-                }
+                } 
                 else
                 {
                     var FlatModel = _mapper.Map<Flat>(flat);

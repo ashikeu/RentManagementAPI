@@ -10,7 +10,7 @@ namespace RentManagementAPI.Models
         public string Name { get; set; } = string.Empty;
         public bool IsActive { get; set; } 
 
-        public Building Building { get; set; }
+        public int FlatId { get; set; } 
         public List<Flat> Flats { get; set; } = new List<Flat>(); 
 
     }

@@ -18,8 +18,10 @@ namespace RentManagementAPI.Services.RentService
             var serviceResponse = new ServiceResponse<Rent>();
             try
             { 
+
                 var rentModel = _mapper.Map<Rent>(rent);
-                await _dataContext.Rent.AddAsync(rentModel);
+                rentModel.ReciptNo=Guid.NewGuid().ToString();   
+                await _dataContext.Rent.AddAsync(rentModel); 
                 await _dataContext.SaveChangesAsync();
                 serviceResponse.Data = rentModel;
             }
@@ -37,9 +39,9 @@ namespace RentManagementAPI.Services.RentService
             var serviceResponse = new ServiceResponse<List<Rent>>();
             try
             {
-                var rents = await _dataContext.Rent
-                        .Include(dpst => dpst.Deposits)
-                        .ToListAsync();
+                var rents = await _dataContext.Rent.ToListAsync();
+                /* .Include(dpst => dpst.Deposits)*/
+
 
                 if (rents != null && rents.Count == 0)
                 {

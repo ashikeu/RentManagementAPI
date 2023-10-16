@@ -41,7 +41,7 @@ namespace RentManagementAPI.Services.BuildingService
                         .Include(flr => flr.Floors)
                         .ToListAsync();
 
-                if (buildings != null && buildings.Count == 0) 
+                if (buildings != null && buildings.Count == 0)  
                 {
                     serviceResponse.Data = null;
                     throw new Exception($"No data found.");

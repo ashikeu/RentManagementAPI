@@ -13,7 +13,7 @@ namespace RentManagementAPI.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("server=103.197.204.163,3341;Database=rentmgt;user=hrpayrolluser;password=hrpayrolluser;Trusted_Connection=false;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("server=103.197.204.163,3341;Database=rentmgtv2;user=hrpayrolluser;password=hrpayrolluser;Trusted_Connection=false;TrustServerCertificate=true");
         }
 
 

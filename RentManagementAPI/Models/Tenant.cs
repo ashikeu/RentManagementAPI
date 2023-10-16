@@ -14,15 +14,15 @@ namespace RentManagementAPI.Models
         public string MobileNo { get; set; } = string.Empty;
         public string EmgMobileNo { get; set; } = string.Empty;
         public int NoofFamilyMember { get; set; }
-        public DateTime ArrivalDate { get; set; }
+        public DateTime ArrivalDate { get; set; } 
         
         public double AdvanceAmount { get; set; }
         public bool IsActive { get; set; }
-        public ByteArrayContent TenantImage { get; set; }
-        public ByteArrayContent TenantNidImage { get; set; }
+        public Byte[] TenantImage { get; set; }
+        public Byte[] TenantNidImage { get; set; }
         public DateTime RentAmountChangeDate { get; set; }
 
-        public Flat Flat { get; set; }
+        
 
         //public double UtilityBill { get; set; }
         // public double GasBill { get; set; }
@@ -33,7 +33,7 @@ namespace RentManagementAPI.Models
 
 
 
-        public List<Flat> Flats { get; set; } = new List<Flat>();
+        
 
     }
 }

@@ -17,11 +17,11 @@
 
         public double AdvanceAmount { get; set; }
         public bool IsActive { get; set; }
-        public ByteArrayContent TenantImage { get; set; }
-        public ByteArrayContent TenantNidImage { get; set; }
+        public Byte[] TenantImage { get; set; }
+        public Byte[] TenantNidImage { get; set; } 
         public DateTime RentAmountChangeDate { get; set; }
 
-        public Flat Flat { get; set; }
+        
 
     }
 }

@@ -37,9 +37,9 @@ namespace RentManagementAPI.Services.TenantService
             var serviceResponse = new ServiceResponse<List<Tenant>>();
             try
             {
-                var tenants = await _dataContext.Tenant
-                        .Include(flat => flat.Flats) 
-                        .ToListAsync();
+                var tenants = await _dataContext.Tenant.ToListAsync();
+                      /*  .Include(flat => flat.Flats) 
+                        .ToListAsync();*/
 
                 if (tenants != null && tenants.Count == 0)
                 {

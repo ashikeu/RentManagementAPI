@@ -12,6 +12,7 @@ using RentManagementAPI.Services.BuildingService;
 using RentManagementAPI.Services.IncomeExpenseService;
 using RentManagementAPI.Services.IncomeExpenseTransactionService;
 using RentManagementAPI.Services.ReportService;
+using RentManagementAPI.Services.PasswordHasher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IBuildingService, BuildingService>();
 builder.Services.AddScoped<IIncomeExpenseService, IncomeExpenseService>();
 builder.Services.AddScoped<IIncomeExpenseTransactionService, IncomeExpenseTransactionService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddDbContext<DataContext>();
 

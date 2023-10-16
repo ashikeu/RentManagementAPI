@@ -8,7 +8,7 @@
 
         public int Bedroom { get; set; } 
 
-        public int Washroom { get; set; }
+        public int Washroom { get; set; } 
         public int FlatSize { get; set; }
         public string FlatSide { get; set; } = string.Empty;
         public int FloorId { get; set; }
@@ -21,9 +21,9 @@
         public double ServiceCharge { get; set; }
 
         public Floor Floor { get; set; }
-        public List<Rent> Rents { get; set; } = new List<Rent>();
+        public Tenant Tenant { get; set; }
 
-        public List<Tenant> Tenants { get; set; } = new List<Tenant>();
+        
 
     }
 }

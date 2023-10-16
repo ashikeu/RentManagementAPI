@@ -15,7 +15,7 @@
         public bool IsRegularUser { get; set; }
         public bool IsAdmin { get; set; }
 
-        public Building Building { get; set; }
+        
 
 
     }
