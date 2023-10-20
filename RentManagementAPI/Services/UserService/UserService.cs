@@ -104,14 +104,14 @@ namespace RentManagementAPI.Services.UserService
                     var userModel = _mapper.Map<User>(user);
                     /*existingUser = userModel;*/
                     existingUser.Name = userModel.Name;
-                    existingUser.PropertyInfoId = userModel.PropertyInfoId;
+                   /* existingUser.PropertyInfoId = userModel.PropertyInfoId;*/
                     existingUser.Password = userModel.Password;
-                    existingUser.IsActive = userModel.IsActive;
+                   /* existingUser.IsActive = userModel.IsActive;*/
                     existingUser.Email = userModel.Email;
                     existingUser.MobileNo = userModel.MobileNo;
-                    existingUser.IsRegularUser = userModel.IsRegularUser;
+                /*    existingUser.IsRegularUser = userModel.IsRegularUser;
                     existingUser.IsLoggedIn = userModel.IsLoggedIn;
-                    existingUser.IsAdmin = userModel.IsAdmin;
+                    existingUser.IsAdmin = userModel.IsAdmin;*/
 
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingUser;
