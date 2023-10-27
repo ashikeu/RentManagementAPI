@@ -109,6 +109,7 @@ namespace RentManagementAPI.Services.FlatService
                     existingFlat.WaterBill= FlatModel.WaterBill;
                     existingFlat.ServiceCharge= FlatModel.ServiceCharge;
                     existingFlat.RentAmount= FlatModel.RentAmount;
+                    existingFlat.BuildingId= FlatModel.BuildingId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingFlat;
                 }

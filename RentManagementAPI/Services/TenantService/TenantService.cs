@@ -110,6 +110,7 @@ namespace RentManagementAPI.Services.TenantService
                     existingTenant.RentAmountChangeDate = tenantModel.RentAmountChangeDate;
                     existingTenant.UserId= tenantModel.UserId;
                     existingTenant.EmgMobileNo= tenantModel.EmgMobileNo;
+                    existingTenant.BuildingId = tenantModel.BuildingId;
                     /*existingTenant.RentAmount = tenantModel.RentAmount;
                     existingTenant.UtilityBill = tenantModel.UtilityBill;
                     existingTenant.GasBill = tenantModel.GasBill;

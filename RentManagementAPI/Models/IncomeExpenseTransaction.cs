@@ -3,6 +3,7 @@
     public class IncomeExpenseTransaction
     {
         public int Id { get; set; }
+        public int BuildingId { get; set; }
         public int IncomeExpenseId { get; set;}
         public DateTime TranDate { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -3,6 +3,7 @@
     public class AddTenantDTO
     {
         public int UserId { get; set; }
+        public int BuildingId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string NID { get; set; } = string.Empty;
         public string PassportNo { get; set; } = string.Empty;

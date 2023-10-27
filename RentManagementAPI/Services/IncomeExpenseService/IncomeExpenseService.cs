@@ -100,6 +100,7 @@ namespace RentManagementAPI.Services.IncomeExpenseService
                     existingIncomeExpense.IncomeExpenseType = incomeExpenseModel.IncomeExpenseType;
 
                     existingIncomeExpense.UserId = incomeExpenseModel.UserId;
+                    existingIncomeExpense.BuildingId= incomeExpenseModel.BuildingId;
                     
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingIncomeExpense;

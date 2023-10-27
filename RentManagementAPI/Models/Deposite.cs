@@ -11,6 +11,9 @@ namespace RentManagementAPI.Models
         public double DueAmount { get; set; }
         public DateTime TranDate { get; set; }
         public int RentId { get; set; }
-        
+        public int TenantId { get; set; }
+        public int FlatId { get; set; }
+        public int BuildingId { get; set; }
+
     }
 }

@@ -102,6 +102,7 @@ namespace RentManagementAPI.Services.IncomeExpenseTransactionService
                     existingIncomeExpenseTransaction.Amount= incomeExpenseTransactionModel.Amount;
                     existingIncomeExpenseTransaction.RentId= incomeExpenseTransactionModel.RentId;
                     existingIncomeExpenseTransaction.UserId= incomeExpenseTransactionModel.UserId;
+                    existingIncomeExpenseTransaction.BuildingId = incomeExpenseTransactionModel.BuildingId;
                     
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingIncomeExpenseTransaction;

@@ -9,5 +9,6 @@
         public double Amount { get; set; }
         public int RentId { get; set; }
         public int UserId { get; set; }
+        public int BuildingId { get; set; }
     }
 }

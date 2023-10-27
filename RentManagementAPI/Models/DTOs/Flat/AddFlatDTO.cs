@@ -13,6 +13,7 @@
         public int FloorId { get; set; }
         public int UserId { get; set; }
         public int TenantId { get; set; }
+        public int BuildingId { get; set; }
         public bool IsActive { get; set; }
         public double RentAmount { get; set; }
         public double GasBill { get; set; }

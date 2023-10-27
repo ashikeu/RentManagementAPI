@@ -5,7 +5,7 @@ namespace RentManagementAPI.Models
     public class Tenant
     { 
         public int Id { get; set; }
-
+        public int BuildingId { get; set; }
         public int UserId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string NID { get; set; } = string.Empty; 

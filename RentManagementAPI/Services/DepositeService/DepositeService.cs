@@ -100,6 +100,9 @@ namespace RentManagementAPI.Services.DepositeService
                     existingDeposite.DueAmount = depositeModel.DueAmount;
                     existingDeposite.TranDate = depositeModel.TranDate; 
                     existingDeposite.RentId = depositeModel.RentId;
+                    existingDeposite.BuildingId= depositeModel.BuildingId;
+                    existingDeposite.FlatId = depositeModel.FlatId;
+                    existingDeposite.TenantId = depositeModel.TenantId;
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingDeposite;
                 }

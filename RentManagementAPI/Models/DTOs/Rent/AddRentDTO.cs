@@ -12,6 +12,7 @@
         public bool IsPaid { get; set; }
         public int FlatId { get; set; }
         public int UserId { get; set; }
+        public int BuildingId { get; set; }
         public int TenantId { get; set; }
         public bool IsPrinted { get; set; }
     }

@@ -111,6 +111,7 @@ namespace RentManagementAPI.Services.RentService
                     existingRent.IsPaid = rentModel.IsPaid;
                     existingRent.FlatId = rentModel.FlatId;
                     existingRent.TenantId = rentModel.TenantId;
+                    existingRent.BuildingId= rentModel.BuildingId;
 
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingRent;
