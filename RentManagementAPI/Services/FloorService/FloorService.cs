@@ -101,7 +101,7 @@ namespace RentManagementAPI.Services.FloorService
                     existingFloor.IsActive= floorModel.IsActive;
                     existingFloor.UserId= floorModel.UserId;
                     existingFloor.BuildingId= floorModel.BuildingId; 
-                    existingFloor.FlatId= floorModel.FlatId;
+                    
                     await _dataContext.SaveChangesAsync();
                     serviceResponse.Data = existingFloor;
                 } 
