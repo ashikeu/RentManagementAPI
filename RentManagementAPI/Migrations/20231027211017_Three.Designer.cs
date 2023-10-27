@@ -12,8 +12,8 @@ using RentManagementAPI.Data;
 namespace RentManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231013130316_Migration two")]
-    partial class Migrationtwo
+    [Migration("20231027211017_Three")]
+    partial class Three
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,13 +60,22 @@ namespace RentManagementAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
                     b.Property<double>("DepositeAmount")
                         .HasColumnType("float");
 
                     b.Property<double>("DueAmount")
                         .HasColumnType("float");
 
+                    b.Property<int>("FlatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TenantId")
                         .HasColumnType("int");
 
                     b.Property<double>("TotalAmount")
@@ -92,6 +101,9 @@ namespace RentManagementAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Bedroom")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
                     b.Property<string>("FlatSide")
@@ -155,9 +167,6 @@ namespace RentManagementAPI.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FlatId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -182,6 +191,9 @@ namespace RentManagementAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
 
                     b.Property<int>("IncomeExpenseType")
                         .HasColumnType("int");
@@ -208,6 +220,9 @@ namespace RentManagementAPI.Migrations
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
+
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
 
                     b.Property<int>("IncomeExpenseId")
                         .HasColumnType("int");
@@ -275,6 +290,9 @@ namespace RentManagementAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
                     b.Property<double>("DueAmount")
                         .HasColumnType("float");
 
@@ -340,6 +358,9 @@ namespace RentManagementAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmgMobileNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -397,18 +418,6 @@ namespace RentManagementAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsLoggedIn")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRegularUser")
-                        .HasColumnType("bit");
-
                     b.Property<string>("MobileNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -420,9 +429,6 @@ namespace RentManagementAPI.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PropertyInfoId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

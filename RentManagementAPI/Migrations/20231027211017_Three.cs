@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentManagementAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrationtwo : Migration
+    public partial class Three : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,10 @@ namespace RentManagementAPI.Migrations
                     DepositeAmount = table.Column<double>(type: "float", nullable: false),
                     DueAmount = table.Column<double>(type: "float", nullable: false),
                     TranDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RentId = table.Column<int>(type: "int", nullable: false)
+                    RentId = table.Column<int>(type: "int", nullable: false),
+                    TenantId = table.Column<int>(type: "int", nullable: false),
+                    FlatId = table.Column<int>(type: "int", nullable: false),
+                    BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +56,8 @@ namespace RentManagementAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IncomeExpenseType = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,6 +70,7 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BuildingId = table.Column<int>(type: "int", nullable: false),
                     IncomeExpenseId = table.Column<int>(type: "int", nullable: false),
                     TranDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -102,6 +107,7 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BuildingId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NID = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -129,14 +135,9 @@ namespace RentManagementAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PropertyInfoId = table.Column<int>(type: "int", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsLoggedIn = table.Column<bool>(type: "bit", nullable: false),
-                    IsRegularUser = table.Column<bool>(type: "bit", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,8 +153,7 @@ namespace RentManagementAPI.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    FlatId = table.Column<int>(type: "int", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,7 +185,8 @@ namespace RentManagementAPI.Migrations
                     RentAmount = table.Column<double>(type: "float", nullable: false),
                     GasBill = table.Column<double>(type: "float", nullable: false),
                     WaterBill = table.Column<double>(type: "float", nullable: false),
-                    ServiceCharge = table.Column<double>(type: "float", nullable: false)
+                    ServiceCharge = table.Column<double>(type: "float", nullable: false),
+                    BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,6 +220,7 @@ namespace RentManagementAPI.Migrations
                     DueAmount = table.Column<double>(type: "float", nullable: false),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     FlatId = table.Column<int>(type: "int", nullable: false),
+                    BuildingId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     TenantId = table.Column<int>(type: "int", nullable: false),
                     IsPrinted = table.Column<bool>(type: "bit", nullable: false),
