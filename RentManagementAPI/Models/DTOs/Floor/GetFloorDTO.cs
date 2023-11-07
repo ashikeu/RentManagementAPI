@@ -8,8 +8,8 @@ namespace RentManagementAPI.Models.DTOs.Floor
         public int Id { get; set; }
         public int UserId { get; set; }
         public int BuildingId { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public bool IsActive { get; set; }
+        public string? Name { get; set; } = string.Empty;
+        public bool? IsActive { get; set; }
        public Flat Flat { get; set; }
         public List<Flat> Flats { get; set; } = new List<Flat>();
     }

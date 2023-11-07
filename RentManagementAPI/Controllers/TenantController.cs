@@ -47,7 +47,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPost]
         [Route("CreateTenant")]
-        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant([FromBody] AddTenantDTO tenant)
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant( [FromBody] AddTenantDTO tenant)
         {
             var serviceResponse = await _tenantService.AddTenant(tenant);
             if (serviceResponse.Data is null)

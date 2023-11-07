@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentManagementAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Three : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,10 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,10 +34,10 @@ namespace RentManagementAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    TotalAmount = table.Column<double>(type: "float", nullable: false),
-                    DepositeAmount = table.Column<double>(type: "float", nullable: false),
-                    DueAmount = table.Column<double>(type: "float", nullable: false),
-                    TranDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalAmount = table.Column<double>(type: "float", nullable: true),
+                    DepositeAmount = table.Column<double>(type: "float", nullable: true),
+                    DueAmount = table.Column<double>(type: "float", nullable: true),
+                    TranDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RentId = table.Column<int>(type: "int", nullable: false),
                     TenantId = table.Column<int>(type: "int", nullable: false),
                     FlatId = table.Column<int>(type: "int", nullable: false),
@@ -55,7 +55,7 @@ namespace RentManagementAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IncomeExpenseType = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -72,9 +72,9 @@ namespace RentManagementAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
                     IncomeExpenseId = table.Column<int>(type: "int", nullable: false),
-                    TranDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
+                    TranDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Amount = table.Column<double>(type: "float", nullable: true),
                     RentId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -89,12 +89,12 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WebAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WebAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,19 +109,19 @@ namespace RentManagementAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PassportNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthCertificateNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmgMobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NoofFamilyMember = table.Column<int>(type: "int", nullable: false),
-                    ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AdvanceAmount = table.Column<double>(type: "float", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    TenantImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    TenantNidImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    RentAmountChangeDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PassportNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthCertificateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmgMobileNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NoofFamilyMember = table.Column<int>(type: "int", nullable: true),
+                    ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AdvanceAmount = table.Column<double>(type: "float", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    TenantImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    TenantNidImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    RentAmountChangeDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,10 +134,10 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -152,8 +152,8 @@ namespace RentManagementAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -172,20 +172,20 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MasterbedRoom = table.Column<int>(type: "int", nullable: false),
-                    Bedroom = table.Column<int>(type: "int", nullable: false),
-                    Washroom = table.Column<int>(type: "int", nullable: false),
-                    FlatSize = table.Column<int>(type: "int", nullable: false),
-                    FlatSide = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MasterbedRoom = table.Column<int>(type: "int", nullable: true),
+                    Bedroom = table.Column<int>(type: "int", nullable: true),
+                    Washroom = table.Column<int>(type: "int", nullable: true),
+                    FlatSize = table.Column<int>(type: "int", nullable: true),
+                    FlatSide = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FloorId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     TenantId = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    RentAmount = table.Column<double>(type: "float", nullable: false),
-                    GasBill = table.Column<double>(type: "float", nullable: false),
-                    WaterBill = table.Column<double>(type: "float", nullable: false),
-                    ServiceCharge = table.Column<double>(type: "float", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    RentAmount = table.Column<double>(type: "float", nullable: true),
+                    GasBill = table.Column<double>(type: "float", nullable: true),
+                    WaterBill = table.Column<double>(type: "float", nullable: true),
+                    ServiceCharge = table.Column<double>(type: "float", nullable: true),
                     BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -211,19 +211,19 @@ namespace RentManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RentMonth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RentAmount = table.Column<double>(type: "float", nullable: false),
-                    GasBill = table.Column<double>(type: "float", nullable: false),
-                    WaterBill = table.Column<double>(type: "float", nullable: false),
-                    ServiceCharge = table.Column<double>(type: "float", nullable: false),
-                    TotalAmount = table.Column<double>(type: "float", nullable: false),
-                    DueAmount = table.Column<double>(type: "float", nullable: false),
-                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    RentMonth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RentAmount = table.Column<double>(type: "float", nullable: true),
+                    GasBill = table.Column<double>(type: "float", nullable: true),
+                    WaterBill = table.Column<double>(type: "float", nullable: true),
+                    ServiceCharge = table.Column<double>(type: "float", nullable: true),
+                    TotalAmount = table.Column<double>(type: "float", nullable: true),
+                    DueAmount = table.Column<double>(type: "float", nullable: true),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: true),
                     FlatId = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     TenantId = table.Column<int>(type: "int", nullable: false),
-                    IsPrinted = table.Column<bool>(type: "bit", nullable: false),
+                    IsPrinted = table.Column<bool>(type: "bit", nullable: true),
                     ReciptNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

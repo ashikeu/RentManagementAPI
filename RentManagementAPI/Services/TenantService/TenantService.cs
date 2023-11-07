@@ -38,8 +38,8 @@ namespace RentManagementAPI.Services.TenantService
             try
             {
                 var tenants = await _dataContext.Tenant.ToListAsync();
-                      /*  .Include(flat => flat.Flats) 
-                        .ToListAsync();*/
+                /*  .Include(flat => flat.Flats) 
+                  .ToListAsync();*/
 
                 if (tenants != null && tenants.Count == 0)
                 {
@@ -81,8 +81,6 @@ namespace RentManagementAPI.Services.TenantService
             }
             return serviceResponse;
         }
-
-
         public async Task<ServiceResponse<Tenant>> UpdateTenant(int id, AddTenantDTO tenant)
         {
             var serviceResponse = new ServiceResponse<Tenant>();

@@ -10,5 +10,5 @@ namespace RentManagementAPI.Services.TenantService
         Task<ServiceResponse<Tenant>> UpdateTenant(int id, AddTenantDTO tenant);
         Task<ServiceResponse<Tenant>> DeleteTenant(int id);
 
-    }
+    } 
 }
