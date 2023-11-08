@@ -39,7 +39,7 @@ namespace RentManagementAPI.Services.FloorService
             try
             {
                 var floors = await _dataContext.Floor
-                        .Include(fl => fl.Flats)
+                        
                         .ToListAsync();
                
                 if (floors != null && floors.Count == 0)

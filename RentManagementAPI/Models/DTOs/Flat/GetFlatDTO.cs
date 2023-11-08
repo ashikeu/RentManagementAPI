@@ -22,8 +22,8 @@
         public double? WaterBill { get; set; }
         public double? ServiceCharge { get; set; }
         public int BuildingId { get; set; }
-        public Floor Floor { get; set; }
-        public Tenant Tenant { get; set; }
+        
+       
 
     }
 }

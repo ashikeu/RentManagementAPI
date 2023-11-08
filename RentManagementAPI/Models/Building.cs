@@ -8,7 +8,7 @@
         public int UserId { get; set; }
         public bool? IsActive { get; set; } 
         
-        public List<Floor> Floors { get; set; } = new List<Floor>(); 
+      
 
     }
 }

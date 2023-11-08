@@ -36,9 +36,9 @@ namespace RentManagementAPI.Services.BuildingService
         {
             var serviceResponse = new ServiceResponse<List<Building>>();
             try
-            {
+            { 
                 var buildings = await _dataContext.Building
-                        .Include(flr => flr.Floors)
+                       
                         .ToListAsync();
 
                 if (buildings != null && buildings.Count == 0)  

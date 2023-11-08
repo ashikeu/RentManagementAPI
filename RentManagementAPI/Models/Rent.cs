@@ -23,7 +23,7 @@ namespace RentManagementAPI.Models
         public string ReciptNo { get; set; } = string.Empty;
         
          
-        public Flat Flat { get; set; }
+      
         
     }
 }

@@ -11,7 +11,7 @@ namespace RentManagementAPI.Models
         public bool? IsActive { get; set; } 
 
    
-        public List<Flat> Flats { get; set; } = new List<Flat>(); 
+       
 
     }
 }

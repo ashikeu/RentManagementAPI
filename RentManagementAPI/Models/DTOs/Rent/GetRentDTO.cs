@@ -20,6 +20,6 @@
         public bool IsPrinted { get; set; }
         public string ReciptNo { get; set; } = string.Empty;
 
-        public Flat Flat { get; set; }
+       
     }
 }
