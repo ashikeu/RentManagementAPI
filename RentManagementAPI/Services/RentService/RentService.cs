@@ -107,7 +107,7 @@ namespace RentManagementAPI.Services.RentService
                     existingRent.DueAmount= rentModel.DueAmount;
                     existingRent.UserId= rentModel.UserId;
                     existingRent.IsPrinted= rentModel.IsPrinted;
-                    existingRent.ReciptNo= rentModel.ReciptNo;
+                    
                     existingRent.IsPaid = rentModel.IsPaid;
                     existingRent.FlatId = rentModel.FlatId;
                     existingRent.TenantId = rentModel.TenantId;
