@@ -1,6 +1,6 @@
 ﻿namespace RentManagementAPI.Models.DTOs.Flat
 {
-    public class AddFlatDTO
+    public class FlatDTO
     {
         public string? Name { get; set; } = string.Empty;
         public int? MasterbedRoom { get; set; }

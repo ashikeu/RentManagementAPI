@@ -47,7 +47,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPost]
         [Route("CreateUser")]
-        public async Task<ActionResult<ServiceResponse<List<User>>>> AddUser([FromBody] AddUserDTO user)
+        public async Task<ActionResult<ServiceResponse<List<User>>>> AddUser([FromBody] UserDTO user)
         {
             var serviceResponse = await _userService.AddUser(user);
             if (serviceResponse.Data is null)
@@ -73,7 +73,7 @@ namespace RentManagementAPI.Controllers
         [HttpPut]
         [Route("UpdateUser/{id}")]
 
-        public async Task<ActionResult<ServiceResponse<List<User>>>> UpdateUser([FromRoute] int id, AddUserDTO user)
+        public async Task<ActionResult<ServiceResponse<List<User>>>> UpdateUser([FromRoute] int id, UserDTO user)
         {
             var serviceResponse = await _userService.UpdateUser(id, user);
             if (serviceResponse.Data is null)

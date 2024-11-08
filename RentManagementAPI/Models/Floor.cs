@@ -8,10 +8,11 @@ namespace RentManagementAPI.Models
         public int UserId { get; set; } 
         public int BuildingId { get; set; }
         public string? Name { get; set; } = string.Empty;
-        public bool? IsActive { get; set; } 
+        public bool? IsActive { get; set; }
 
-   
-       
+        public virtual Building? Building { get; set; }
+
+        public virtual User? User { get; set; }
 
     }
 }

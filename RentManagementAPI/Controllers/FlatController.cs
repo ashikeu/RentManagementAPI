@@ -46,7 +46,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPost]
         [Route("CreateFlat")]
-        public async Task<ActionResult<ServiceResponse<List<Flat>>>> AddFlat([FromBody] AddFlatDTO flat)
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> AddFlat([FromBody] FlatDTO flat)
         {
             var serviceResponse = await _flatService.AddFlat(flat);
             if (serviceResponse.Data is null)
@@ -59,7 +59,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPut]
         [Route("UpdateFlat/{id}")]
-        public async Task<ActionResult<ServiceResponse<List<Flat>>>> UpdateFlat([FromRoute] int id, AddFlatDTO flat)
+        public async Task<ActionResult<ServiceResponse<List<Flat>>>> UpdateFlat([FromRoute] int id, FlatDTO flat)
         {
             var serviceResponse = await _flatService.UpdateFlat(id, flat);
             if (serviceResponse.Data is null)

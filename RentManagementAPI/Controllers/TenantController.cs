@@ -47,7 +47,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPost]
         [Route("CreateTenant")]
-        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant( [FromBody] AddTenantDTO tenant)
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> AddTenant( [FromBody] TenantDTO tenant)
         {
             var serviceResponse = await _tenantService.AddTenant(tenant);
             if (serviceResponse.Data is null)
@@ -61,7 +61,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPut]
         [Route("UpdateTenant/{id}")]
-        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> UpdateTenant([FromRoute] int id, AddTenantDTO tenant)
+        public async Task<ActionResult<ServiceResponse<List<Tenant>>>> UpdateTenant([FromRoute] int id, TenantDTO tenant)
         {
             var serviceResponse = await _tenantService.UpdateTenant(id, tenant);
             if (serviceResponse.Data is null)

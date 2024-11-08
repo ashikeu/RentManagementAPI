@@ -1,6 +1,6 @@
 ﻿namespace RentManagementAPI.Models.DTOs.Rent
 {
-    public class AddRentDTO
+    public class RentDTO
     {
         public DateTime? RentMonth { get; set; }
         public double? RentAmount { get; set; }

@@ -25,12 +25,14 @@ namespace RentManagementAPI.Models
         public byte[]? TenantNidImage { get; set; }
         public DateTime? RentAmountChangeDate { get; set; }
 
-        
+        public virtual Building? Building { get; set; }
 
-   
+        public virtual User? User { get; set; }
 
 
-        
+
+
+
 
     }
 }

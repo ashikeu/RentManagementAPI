@@ -20,8 +20,11 @@
         public double? WaterBill { get; set; }
         public double? ServiceCharge { get; set; }
         public int BuildingId { get; set; }
-      
-       
+
+        public virtual Floor? Floor { get; set; } 
+        public virtual User? User { get; set; }
+        public virtual Tenant? Tenant { get; set; }
+        public virtual  Building? Building { get; set; } 
 
         
 

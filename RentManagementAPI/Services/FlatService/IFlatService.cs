@@ -6,8 +6,8 @@ namespace RentManagementAPI.Services.FlatService
     {
         Task<ServiceResponse<List<Flat>>> GetAllFlats();
         Task<ServiceResponse<Flat>> GetFlatById(int id);
-        Task<ServiceResponse<Flat>> AddFlat(AddFlatDTO flat);
-        Task<ServiceResponse<Flat>> UpdateFlat(int id, AddFlatDTO flat);
+        Task<ServiceResponse<Flat>> AddFlat(FlatDTO flat);
+        Task<ServiceResponse<Flat>> UpdateFlat(int id, FlatDTO flat);
         Task<ServiceResponse<Flat>> DeleteFlat(int id);
     }
 }

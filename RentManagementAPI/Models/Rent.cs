@@ -21,9 +21,14 @@ namespace RentManagementAPI.Models
         public int TenantId { get; set; }
         public bool? IsPrinted { get; set; }
         public string ReciptNo { get; set; } = string.Empty;
-        
-         
-      
-        
+
+        public virtual Flat? Flat { get; set; }
+        public virtual User? User { get; set; }
+        public virtual Tenant? Tenant { get; set; }
+        public virtual Building? Building { get; set; }
+
+
+
+
     }
 }

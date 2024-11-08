@@ -1,6 +1,6 @@
 ﻿namespace RentManagementAPI.Models.DTOs.PropertyInfo
 {
-    public class AddPropertyInfoDTO
+    public class PropertyInfoDTO
     {
         public string? Name { get; set; } = string.Empty;
         public string? WebAddress { get; set; } = string.Empty;

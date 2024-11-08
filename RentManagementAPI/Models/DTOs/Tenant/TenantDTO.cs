@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RentManagementAPI.Models.DTOs.Tenant
 {
-    public class AddTenantDTO
+    public class TenantDTO
     {
       
         public int UserId { get; set; }

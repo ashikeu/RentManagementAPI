@@ -18,7 +18,7 @@ namespace RentManagementAPI.Services.UserService
             _mapper = mapper;
             _passwordHasher = passwordHasher;
         }
-        public async Task<ServiceResponse<User>> AddUser(AddUserDTO user)
+        public async Task<ServiceResponse<User>> AddUser(UserDTO user)
         {
             var serviceResponse = new ServiceResponse<User>();
             try
@@ -89,7 +89,7 @@ namespace RentManagementAPI.Services.UserService
         }
 
 
-        public async Task<ServiceResponse<User>> UpdateUser(int id, AddUserDTO user)
+        public async Task<ServiceResponse<User>> UpdateUser(int id, UserDTO user)
         {
             var serviceResponse = new ServiceResponse<User>();
             try

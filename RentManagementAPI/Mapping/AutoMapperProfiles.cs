@@ -16,22 +16,21 @@ namespace RentManagementAPI.Mapping
     {
         public AutoMapperProfiles() 
         {
-            CreateMap<Floor, GetFloorDTO>().ReverseMap();
-            CreateMap<AddFloorDTO, Floor>().ReverseMap();
+            CreateMap<Floor, FloorDTO>().ReverseMap();            
             CreateMap<Flat, GetFlatDTO>().ReverseMap();
-            CreateMap<AddFlatDTO, Flat>().ReverseMap();
+            CreateMap<FlatDTO, Flat>().ReverseMap();
             CreateMap<Tenant, GetTenantDTO>().ReverseMap();
-            CreateMap<AddTenantDTO, Tenant>().ReverseMap();
+            CreateMap<TenantDTO, Tenant>().ReverseMap();
             CreateMap<Rent, GetRentDTO>().ReverseMap();
-            CreateMap<AddRentDTO, Rent>().ReverseMap();
+            CreateMap<RentDTO, Rent>().ReverseMap();
             CreateMap<Deposite, GetDepositeDTO>().ReverseMap();
             CreateMap<AddDepositeDTO, Deposite>().ReverseMap();
             CreateMap<Building, GetBuildingDTO>().ReverseMap();
-            CreateMap<AddBuildingDTO, Building>().ReverseMap();
+            CreateMap<BuildingDTO, Building>().ReverseMap();
             CreateMap<User, GetUserDTO>().ReverseMap();
-            CreateMap<AddUserDTO, User>().ReverseMap();
+            CreateMap<UserDTO, User>().ReverseMap();
             CreateMap<PropertyInfo, GetPropertyInfoDTO>().ReverseMap();
-            CreateMap<AddPropertyInfoDTO, PropertyInfo>().ReverseMap();
+            CreateMap<PropertyInfoDTO, PropertyInfo>().ReverseMap();
             CreateMap<IncomeExpense, GetIncomeExpenseDTO>().ReverseMap();
             CreateMap<AddIncomeExpenseDTO, IncomeExpense>().ReverseMap();
             CreateMap<IncomeExpenseTransaction, GetIncomeExpenseTransactionDTO>().ReverseMap();

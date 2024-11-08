@@ -6,8 +6,8 @@ namespace RentManagementAPI.Services.PropertyInfoService
     {
         Task<ServiceResponse<List<PropertyInfo>>> GetAllPropertyInfos();
         Task<ServiceResponse<PropertyInfo>> GetPropertyInfoById(int id);
-        Task<ServiceResponse<PropertyInfo>> AddPropertyInfo(AddPropertyInfoDTO propertyInfo);
-        Task<ServiceResponse<PropertyInfo>> UpdatePropertyInfo(int id, AddPropertyInfoDTO propertyInfo);
+        Task<ServiceResponse<PropertyInfo>> AddPropertyInfo(PropertyInfoDTO propertyInfo);
+        Task<ServiceResponse<PropertyInfo>> UpdatePropertyInfo(int id, PropertyInfoDTO propertyInfo);
         Task<ServiceResponse<PropertyInfo>> DeletePropertyInfo(int id);
     }
 }

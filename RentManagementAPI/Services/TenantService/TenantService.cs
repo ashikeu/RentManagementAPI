@@ -13,7 +13,7 @@ namespace RentManagementAPI.Services.TenantService
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<Tenant>> AddTenant(AddTenantDTO tenant)
+        public async Task<ServiceResponse<Tenant>> AddTenant(TenantDTO tenant)
         {
             var serviceResponse = new ServiceResponse<Tenant>();
             try
@@ -81,7 +81,7 @@ namespace RentManagementAPI.Services.TenantService
             }
             return serviceResponse;
         }
-        public async Task<ServiceResponse<Tenant>> UpdateTenant(int id, AddTenantDTO tenant)
+        public async Task<ServiceResponse<Tenant>> UpdateTenant(int id, TenantDTO tenant)
         {
             var serviceResponse = new ServiceResponse<Tenant>();
             try

@@ -6,8 +6,8 @@ namespace RentManagementAPI.Services.RentService
     {
         Task<ServiceResponse<List<Rent>>> GetAllRents();
         Task<ServiceResponse<Rent>> GetRentById(int id);
-        Task<ServiceResponse<Rent>> AddRent(AddRentDTO rent);
-        Task<ServiceResponse<Rent>> UpdateRent(int id, AddRentDTO rent);
+        Task<ServiceResponse<Rent>> AddRent(RentDTO rent);
+        Task<ServiceResponse<Rent>> UpdateRent(int id, RentDTO rent);
         Task<ServiceResponse<Rent>> DeleteRent(int id);
     }
 }

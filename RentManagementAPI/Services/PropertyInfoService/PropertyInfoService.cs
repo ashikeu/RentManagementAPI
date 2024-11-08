@@ -13,7 +13,7 @@ namespace RentManagementAPI.Services.PropertyInfoService
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<PropertyInfo>> AddPropertyInfo(AddPropertyInfoDTO propertyInfo) 
+        public async Task<ServiceResponse<PropertyInfo>> AddPropertyInfo(PropertyInfoDTO propertyInfo) 
         {
             var serviceResponse = new ServiceResponse<PropertyInfo>();
             try
@@ -83,7 +83,7 @@ namespace RentManagementAPI.Services.PropertyInfoService
         }
 
 
-        public async Task<ServiceResponse<PropertyInfo>> UpdatePropertyInfo(int id, AddPropertyInfoDTO propertyInfo)
+        public async Task<ServiceResponse<PropertyInfo>> UpdatePropertyInfo(int id, PropertyInfoDTO propertyInfo)
         {
             var serviceResponse = new ServiceResponse<PropertyInfo>();
             try

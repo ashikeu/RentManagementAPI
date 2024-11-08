@@ -47,7 +47,7 @@ namespace RentManagementAPI.Controllers
 
         [HttpPost]
         [Route("CreatePropertyInfo")]
-        public async Task<ActionResult<ServiceResponse<List<PropertyInfo>>>> AddPropertyInfo([FromBody] AddPropertyInfoDTO propertyInfo)
+        public async Task<ActionResult<ServiceResponse<List<PropertyInfo>>>> AddPropertyInfo([FromBody] PropertyInfoDTO propertyInfo)
         {
             var serviceResponse = await _propertyInfoService.AddPropertyInfo(propertyInfo);
             if (serviceResponse.Data is null)
@@ -62,7 +62,7 @@ namespace RentManagementAPI.Controllers
         [HttpPut]
         [Route("UpdatePropertyInfo/{id}")]
 
-        public async Task<ActionResult<ServiceResponse<List<PropertyInfo>>>> UpdatePropertyInfo([FromRoute] int id, AddPropertyInfoDTO propertyInfo)
+        public async Task<ActionResult<ServiceResponse<List<PropertyInfo>>>> UpdatePropertyInfo([FromRoute] int id, PropertyInfoDTO propertyInfo)
         {
             var serviceResponse = await _propertyInfoService.UpdatePropertyInfo(id, propertyInfo);
             if (serviceResponse.Data is null)

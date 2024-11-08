@@ -14,7 +14,7 @@ namespace RentManagementAPI.Services.FlatService
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<Flat>> AddFlat(AddFlatDTO flat)
+        public async Task<ServiceResponse<Flat>> AddFlat(FlatDTO flat)
         {
             var serviceResponse = new ServiceResponse<Flat>(); 
             try
@@ -82,7 +82,7 @@ namespace RentManagementAPI.Services.FlatService
         }
 
 
-        public async Task<ServiceResponse<Flat>> UpdateFlat(int id, AddFlatDTO flat)
+        public async Task<ServiceResponse<Flat>> UpdateFlat(int id, FlatDTO flat)
         {
             var serviceResponse = new ServiceResponse<Flat>();
             try

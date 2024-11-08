@@ -8,6 +8,7 @@
         public int UserId { get; set; }
         public bool? IsActive { get; set; } 
         
+        public virtual PropertyInfo? PropertyInfo { get; set; }
       
 
     }

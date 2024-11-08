@@ -14,7 +14,7 @@ namespace RentManagementAPI.Services.FloorService
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<Floor>> AddFloor(AddFloorDTO floor)
+        public async Task<ServiceResponse<Floor>> AddFloor(FloorDTO floor)
         {
             var serviceResponse = new ServiceResponse<Floor>();
             try
@@ -84,7 +84,7 @@ namespace RentManagementAPI.Services.FloorService
         }
 
 
-        public async Task<ServiceResponse<Floor>> UpdateFloor(int id, AddFloorDTO floor)
+        public async Task<ServiceResponse<Floor>> UpdateFloor(int id, FloorDTO floor)
         {
             var serviceResponse = new ServiceResponse<Floor>();
             try
