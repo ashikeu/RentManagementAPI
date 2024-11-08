@@ -13,7 +13,9 @@ namespace RentManagementAPI.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-           // optionsBuilder.UseLazyLoadingProxies().UseSqlServer("server=103.197.204.163,3341;Database=rentmgtv3;user=hrpayrolluser;password=hrpayrolluser;Trusted_Connection=false;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("server=23.96.45.109,59181;Database=rentmgtv3;user=StErp;password=Bangladesh@3;MultipleActiveResultSets=True;TrustServerCertificate=true");
+            //optionsBuilder.UseLazyLoadingProxies().UseSqlServer("server=23.96.45.109,59181;Database=rentmgtv3;user=StErp;password=Bangladesh@3;MultipleActiveResultSets=True;TrustServerCertificate=true");
+
         }
 
 

@@ -66,9 +66,14 @@ namespace RentManagementAPI.Services.RentService
             var serviceResponse = new ServiceResponse<Rent>();
             try
             {
+                //var existingRent = await _dataContext.Rent
+                //    .Include(p=>p.Tenant)
+                //    .Include(p=>p.User)
+                //    .FirstOrDefaultAsync(x => x.Id == id);
                 var existingRent = await _dataContext.Rent.FirstOrDefaultAsync(x => x.Id == id);
                 if (existingRent is null)
                 {
+                    var tenent = existingRent.Tenant;
                     throw new Exception($"Rent with id {id} not found.");
                 }
                 else
